@@ -1,0 +1,18 @@
+### Docker Networking and Container Orchestrations
+
+As containers run on a host, they can use host's Operating System - managed ports to expose and access each other's services. E.g., when starting a container that runs a database, host's port 12345 can be mapped to the container's port 27017; then the web server container can get to the database via the port 12345. Technically, containers run on an emulated network, maintained by the Docker daemon on the host, and they get their own IP addresses, whereas the host's address is 172.17.0.1. In the above example, the web server would get to the database at `172.17.0.1:12345`. In addition to the default network `172.17`, other docker networks can be explicitly configured and used.
+
+The ultimate usability comes from connecting multiple hosts into clusters - this would be the orchestration. From the dev standpoint, the multi-host configuration is fully transparent: the orchestration engine is responsible for managing the network emulation across the hosts, but in reality the orchestration adds lots of complexity when it comes to managing multi-container runtimes. Although the hosts are logically virtualized, somewhere down the virtualization path they are placed on physical hardware, so the containers' file systems, especially volumes shared on hosts, map to some physical devices that usually cannot be moved around at will. A bunch of containers gets placed on a physical machine with finite CPU and memory capacities they end up sharing and competing for. For redundancy, host are distributed across physical clusters to ensure availability in case one particular cluster dies - this adds latency to cross-container communications. 
+
+App design must be done with these considerations in mind, and it has to be quite different from the traditional design for a large box or a bunch of boxes. As an example, in-memory caching done by running a dedicated application on the VM becomes less effective or even performance-degrading if the caching application gets placed far away from the its consumers by the container orchestration engine. 
+
+Popular engines like Kubernetes use concepts of Pods which allow placing specific containers together, but larger components require larger hosts, which in their extreme become bigger, less efficient and harder configurable than the traditional VMs (!)
+
+Yet another critical consideration is the app's startup vs. runtime CPU and memory requirements: traditional frameworks like Django, by default, do lots of checking at startup that cause CPU spikes. This behavior is prohibitive when running container orchestration over shared resources. Worst so, as the orchestration is based on the concept of restarting failed apps and adding apps capacity when the demand is high, startup spikes strain the system, causing it to try to increase the capacity by starting more apps, which create even higher spikes, capable of freezing and killing the entire orchestration cluster.
+
+### Basic Principles of App Design for Container Orchestration 
+
+- Choose light and simple base apps frameworks with low startup and runtime capacity requirements 
+- Avoid using persistent states, "sticky sessions", container-level persistent datasets to enable seamless and transparent container placement and redeployment natively by the orchestration engine 
+- Use services outside of the orchestration engine's management scope for inherently persisted systems such as databases or queues 
+- Design effective in-memory caching solutions balancing cross-container networking latency and single placed component's footprint
