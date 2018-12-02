@@ -1,8 +1,9 @@
-### Course Backend Sample Use Case 
+### Course Sample Use Case 
 
-A backend sample use case usually includes a front end (FE) piece which takes part of the focus away from the core material. Luckily, GraphQL API comes with a built-in data access facility, so we can build a complete solution and see it in action without coding or borrowing a FE app. 
+A backend use case usually includes a front end (FE) piece as means to invoke the functionality. Luckily, GraphQL API comes with a built-in data access facility, so we can build a complete solution and view it in action without having to code or borrow a FE app. 
 
 Would not it make more sense building a backend a FE together? After all, one of the benefits of using JS in the backend is said to be an alleged code reusability between the two parts of the overall solution. The main reason this course is backend-only is that modern FE technologies are very specialized and represent complete frameworks vs. just methods or recommendations on how to code a browser-side application in JS (or TS). Choosing, understanding, learning such a technology is a separate task that requires quite a lot of specialized knowledge, and then the methods evolve so fast that code written 12-15 month ago is simply not maintainable or upgradable anymore. Doesn't sound like a field to venture into in your first re-tooling course from legacy to modern dev. Don't worry, there is enough work in the backend, which is generally considered a harder skill to learn - when starting from zero IT experience. Yet, once you master the modern backend and get more familiar with JS and surrounding tech, getting how the FE works, and you should be able to pick a specific tech that makes more sense to you as a professional vs. following "advise" of someone fresh out of a coding camp.
 
-So, the use case for this course is a simple Sales Order Entry: Customers, Items, Orders. We will call Customers Users, as a modern application is self-service oriented. The User gets access to the system, picks the Items, creates the Order. That is the use case.
+So, the use case for this course is a simple Sales Order Entry: Customers, Items, Orders. We will call Customers Users, as a modern application is self-service oriented. The User gets access to the system, picks the Items, creates the Order; the Order is stored in the database can be retrieved via the API.
 
+Let's start coding!
