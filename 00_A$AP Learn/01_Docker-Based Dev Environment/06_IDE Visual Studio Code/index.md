@@ -13,3 +13,5 @@ Fundamentally, containerization allows constructing environments hosted anywhere
 Keep in mind that as JS is a loosely structured language, intelligent capabilities of any IDE are limited when coding in it (TS adds more structure and gives more power to the IDE). So, when it comes to backend JS dev, a "fancier" IDE would not give you much compare to a "basic" one. No wonder, a number of professional devs develop in plain text editors like VIM. 
 
 Install VSC if you haven't already done so - it's a great tool, you won't regret. This course, however, doesn't require you using a specific IDE - any code writing tool will do. In the end - the code is written by the dev, not by the IDE.
+
+Configure VSC to keep files open and do auto-save. 
