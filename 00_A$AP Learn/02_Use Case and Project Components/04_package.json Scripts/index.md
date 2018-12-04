@@ -1,8 +1,8 @@
 ### package.json scripts Section 
 
-Similar to the concept of `Makefile` or `Maven`, `npm` (or `yarn`) enables "automation" of the project lifecycle stages. Here comes `npm install` that loads the dependencies. The idea behind the `scripts` section in the `package.json` is that the dev can configure some custom behavior associated with those stages. In the era of sophisticated configuration management tools such as `Ansible`, `Chef` and `Pappet`, managing your project via little scripts sounds somewhat naive, so the dev should be taking the `scripts` approach at its face value and use to handle small concrete tasks. 
+Similar to the concept of `Makefile` or `Maven`, `npm` (or `yarn`) enables "automation" of the project lifecycle stages. Here comes `npm install` that loads the dependencies. The idea behind the `scripts` section in the `package.json` is that the dev can configure some custom behavior associated with those stages. In the era of sophisticated configuration management tools such as `Ansible`, `Chef` and `Pappet`, managing your project via little scripts sounds somewhat naive, so the dev should be taking the `scripts` approach at its face value and use to handle small specific tasks. 
 
-Let's review the content of the `scripts` section in the demo project:
+Let's review the content of the `package.json` `scripts` section in the demo project:
 
 ```json
 "scripts": {
@@ -38,9 +38,9 @@ The left side represents the name of the "state" or the "command" to execute via
 
 You see that the script runs another script named `start:dev`, which is present in the `scripts` section. Notice the `run` addition in between `npm` and the name of the script: running custom scripts requires this `run` keyword, unlike running standard scripts/commands. Somewhat confusing - why not to use a uniform syntax always? Although, `npm run start` in our case acts similarly to `npm start`, `npm run install` fails with `missing script: install`. So, you get the idea: if the script is present, you can add `run` to execute it even if the script overrides a standard command (if you're not sure whether the command is standard or not), and you must add `run` to execute custom ones. 
 
-`start:dev` in our setup runs `better-npm-run start-dev`. `better-npm-run` is a package used to facilitate scripts execution on Windows - it covers for the file path differences (`/` vs. `\`). `better-npm-run` is listed in dependencies, and the `start-dev` is in the `betterScripts` section. `cross-env` is another popular package used on the Windows platform.
+`start:dev` in our setup runs `better-npm-run start-dev`. `better-npm-run` is a package used to facilitate scripts execution on Windows - it covers for the file path differences (`/` vs. `\`). `better-npm-run` is listed in `dependencies`, and the `start-dev` is in the `betterScripts` section. `cross-env` is another popular package used on the Windows platform.
 
-`nodemon` is also a package listed in dependencies. It "watches" the `src` directory for changes and restarts the process as specified via the `--exec` option, which in our case is `babel-node` execution of the `src/server.js` file, the entry point into the application. 
+`nodemon` is also a package listed in `dependencies`. It "watches" the `src` directory for changes and restarts the process as specified via the `--exec` option, which in our case is `babel-node` execution of the `src/server.js` file, the entry point into the application. 
 
 As you can see, `start-prod` executes the code from the `build` folder, directly from `node`, so that code must be processed via `babel` ahead of time - which is done, according to the scripts, in the `build` step.
 
