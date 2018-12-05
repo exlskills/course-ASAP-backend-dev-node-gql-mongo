@@ -2,6 +2,8 @@
 
 `package.json` is written to [NodeJS Package Manager standard](https://docs.npmjs.com/creating-a-package-json-file). Sure enough, it is also usually copied from somewhere initially and then updated. The `package-lock.json` is auto-generated or updated when the Package Manager runs the installation and brings in all required 3rd party ("external") packages, listed in the `dependencies` and `devDependencies` sections of `package.json`. Just like with other systems, e.g., `Maven` in Java or `pip` in Python, correct dependencies management is absolutely crucial for your custom project. 
 
+If you want to initiate a project from scratch (why would you ever?) - you can run `npm init` in the project's designated directory.
+
 Stable release versions of external packages are usually 3 dot-separated numbers. The dependency list must specify which version should be loaded by the Package Manager into `node_modules/` and used and runtime. As the external packages have their own dependencies, the Package Manager applies some logic to ensure that all required dependencies are brought in. Reusable common dependencies and everything listed in your `package.json` is placed into individual sub-folders under `node_modules`. If an external package requires a version of some package different from the one listed in `package.json`, that version will be loaded into a separate `node_modules` sub-folder under the external package's sub-folder - for its own use.
 
 You can use version-matching rules to define if you require the exact 3-pos "Patch" version, or any Patch within the 2-pos "Minor" release, or anything in the 1-pos "Major" release. The rules can be coded using `< = >` signs and/or tilde or caret `~^` in front of the numbers, as well as `*` for any version, including unstable, or the word `latest` for the latest available stable version of the package. The tilde `~` generally means the exact match of the listed numbers. The caret `^` can be confusing as its logic is based on zero vs. non-zero numbers in the combination it prefixes. In its common use, the dev places `^` in front of the current latest available Patch version, and that guarantees that the package will be loaded at least at that version or at a later Minor-Patch, but at the same Major. The latest available package version can be found by going to the package's npm site or prompted by the IDE when it is connected to the npm system over the internet.
@@ -15,3 +17,9 @@ Different systems periodically inform you if you vulnerabilities have been ident
 Packages listed in the `devDependencies` section are only required for the dev environment and are not loaded when the production environment is built.
 
 We will review the content of `package.json` used in this course in details as we explain individual JS code components and processes
+
+### Adding New Packages Via the Command Line 
+
+In packages' documentation, the authors always tell you to run `npm install <package>` to use it. When adding new packages to your project, this is a convenient way installing and at the same loading the package into the `package.json` `dependencies`. The package will be installed at the latest version and added in the right place, sorted alphabetically, with the `^` prefix in front of the version. To add new packages to `devDependencies`, use `npm install <package> --save-dev`
+
+Everything you do via `npm`, by default affects the current directory only. However, a "global" install of packages is also available. It is a common recommendation not to install packages globally for various reasons. When developing in a dockerized environment - a global install is pretty much not even an option, by definition of running NodeJS stuff in the containers vs. on the host.

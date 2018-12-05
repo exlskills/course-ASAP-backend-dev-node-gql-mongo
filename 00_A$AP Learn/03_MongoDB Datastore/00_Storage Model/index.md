@@ -70,6 +70,21 @@ The relaxed structure requirements take away such a huge nuisance of RDBMS as *m
 
 So, overall the flexibility seems to be a lesser risk and downside than enforcing the model consistency in the DB layer - validate the data in your App, before it gets passed into the DB. As the App should be your ultimate producer and consumer of the data - you would have to re-code your logic in one system if needed so.
 
+### Object ID
+
+Each Document in MongoDB must have a unique field `_id`. The engine will assign one for you when creating a Document, unless it is explicitly provided (in which case the engine checks its uniqueness and rejects the doc if the `_id` is already present in the Collection). The built-in MongoDB `ObjectId` type is 12 bytes in size where the leading bytes represent the Timestamp. If you'd rather use your own value that is unique and have a business meaning - you can, just need to pass it in when creating the Document. Once the Document is created, its `_id` cannot be changed.
+
+There is a default index on `_id`, so querying and filtering by `_id` is always fast.
+
+### Date and Time
+
+Ideally, the Dates should be stored and handled in queries and filters as MongoDB `ISODate` objects, which happens automatically when the Date field type is used in JS and `mongoose`. As the Date is handled internally as a number and converted according to the runtime Time Zone (or the explicitly provided one) when used as a Date, the Date object always corresponds to a specific moment in time, although, numerically different across Time Zones.
+
+The rule of thumb is that as long as you handle Date objects properly in the code, maintaining the Time Zone values, MongoDB will store your data correctly. Specifying the Time Zone explicitly takes ambiguity out of the process, but you can also rely on your JS engine defaulting the Time Zone based on the given runtime environment's clock. Just make sure you don't incidentally override the time somewhere along the processing path. 
+
+As an example, let's assume that your client, app server and MongoDB server are all in different Time Zones. The client sends a complete Date object to the app server (technically, a numeric value), with the client's Time Zone correctly reflected in it. The app server passes the object as-is into the MongoDB, which stores it. Now, as we fetch the object back into the app server, it gets automatically converted into the corresponding time of the app server, different clock-wise, but matching the moment of the client's time that came in. JS will take care of the proper conversion, and MongoDB will assure saving the value relatively to the Time Zone. On the other hand, if you mishandle or butcher the client's date interpretation in the app, you may end up passing the client's clock object to the DB, but with the app's Time Zone in it. In other words, if you use proper Date objects within the flow, modern JS and MongoDB by default will handle the conversions for you on the fly. If you are unsure what objects are used - you can force an explicit conversion of everything to, e.g., UTC, whenever you pass *and retrieve* the data in the app server.
+
+You should also pass explicit Time Zones with your queries to ensure you're filtering the data unambiguously. 
 
 ### What About Replication and Sharding?
 
@@ -78,3 +93,11 @@ Your database must always be available and operational, which is achieved by con
 If you use Atlas, you don't need to worry about installing and maintaining your DB - ever.
 
 Sharding allows you controlling how your data is placed - if you got so much of it that it starts really matter for the overall performance of your solution where specific subsets of data are located relatively to your data providers and consumers. Out of scope of this demo course.
+
+### More on Indexing
+
+Indexes in MongoDB are used to assist search and sorting - no surprise here. If a field is inside an embedded array, e.g., `"items.sku"`, each element of the array is indexed transparently - as expected. Unlike RDBMS, MongoDB specifically distinguishes between *Single Field* and *Compound* Indexes - those that are built over two or more fields. In RDBMS, the query engine is supposed to figure out the best access path based on all present indexes to choose from. According to the documentation, MongoDB can also do *Index Intersection* - use multiple available indexes to assist in selecting Documents matching a multi-condition query. E.g., if selecting some Orders of one User, an RDBMS-trained dev would expect that the engine will use the User index first, then the index on the Order condition, say, Date, to get the result. Not necessarily in MongoDB: it may end up using one single-field index only, e.g., on the User ID, and then scan over all orders for that User, even if the another index covering the Order filter condition exists. The practical solution is to check all important queries via the Compass "Explain Plan" option and see the access path used. Conveniently, indexes can be added or deleted on the fly via Compass as well. So, if you want to streamline your multi-condition query, you may need to create a compound index, e.g, on User ID and Order Date in our example. In production, MongoDB Atlas service will send you warnings if your queries cause multi-record scans. Depending on the tier of your service at Atlas, you can even get detailed analysis reports, but usually a quick look at your queries and check via Compass would lead you to the fix.
+
+The direction of indexes - Ascending or Descending - can be specified at the field level, and it is also affects whether or not the index is used processing the query, especially for Compound indexes.
+
+Text indexes is an interesting topic, outside of scope of this demo. MongoDB has developed a language-specific text search functionality, which is quite extensive and can only be figured out by trying different combinations of indexing and searching methods. Up to you if you want to give it a try or move to using Elasticsearch as your open text search solution.

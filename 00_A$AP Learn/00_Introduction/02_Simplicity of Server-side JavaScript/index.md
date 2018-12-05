@@ -8,4 +8,18 @@ As JS and TS are actively evolving technologies, there are some additional tools
 
 So, if someone says JS is not a production-strength language and it's hard to learn for a classically trained dev - they either look at specific edge use cases or aren't aware of the modern versions of JS.
 
+## Note on JS Promises
+
+Reading about JS async functions, you'll see references to *Promises*. If `then` is not so clear for you, Promise may just turn you completely away from learning JS. The good news is that you don't have to use Promises in your modern JS code if you don't want to. Shaking off convoluted naming conventions and long theoretical explanations, you definitely understand that an async function *returns* something that becomes available to the program flow in the *Future* only (here's the Java 8's name for the async return). 
+
+At any given time during the execution, the async function's return value can be (in the Promise terminology):
+- *pending* - the function is still running
+- *fulfilled* - completed normally, whatever that means
+- *rejected* - errored out, again, within the definitions of failing
+
+A JS async function can be written to use the Promise object either explicitly or implicitly. In the latter case, you never use the word `Promise` in your code, but your async function does the same stuff: runs some logic and then either completes Ok or with an error.
+
+The critical importance is on the error handling side, and the familiar `try/catch` is the ultimate method of keeping your code clean and clear, as we will demonstrate. Once you get comfortable enough with JS, reading and understanding someone elses code with Promises won't be an issue, and if you find it more suitable for you than the dry async `try/catch` code - you can certainly use.
+
+
 Read on, and you'll be coding professional JS backend software in a matter of hours after catching up with how the code in this course works 
