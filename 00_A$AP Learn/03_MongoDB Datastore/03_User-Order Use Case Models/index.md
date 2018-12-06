@@ -121,4 +121,4 @@ The `auto` flag ensures that the `_id` is generated. By default, MongoDB does no
 
 Note the `index: true` for the `item_id` field and the `type: Object` designation for the `item_details`. We'll see later how the built-in object handling capabilities of JS allow us "merging" the `item_details` from the Item Document with those specified for the Order Item, overriding matching properties with the more specific values entered on the Order.
 
-That's all with MongoDB for now, lets move on to see how the NodeJS App server runs!
+That's all with MongoDB for now, lets move on to see how the GraphQL side of the process works!
