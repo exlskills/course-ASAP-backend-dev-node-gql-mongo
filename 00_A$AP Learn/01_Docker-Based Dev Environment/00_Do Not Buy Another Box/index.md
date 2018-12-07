@@ -5,4 +5,6 @@ The containerization is not just a dev convenience or hack - this is the mainstr
 
 Again, outside of some edge cases, each component of each business software system runs in a separate container or runs as a service - outside of the system. This is true in production and testing, and this should be the case in development as well. The Dev should not be installing, maintaining or updating any software on the dev machine other than the OS of the choice, the IDE and Docker. An extreme case would be running an online IDE service, complemented with the full dockerized environment, but that often defeats the core purpose of having a robust dev box as the necessity to code quickly and efficiently.
 
+## MTR (Minimal Technical Requirements)
 
+An average laptop with 4GB RAM and some remaining disk space should be Ok

@@ -11,3 +11,7 @@ NodeJS handles access to the OS Environment variables via `process.env` object, 
 As `.env` by definition of its purpose contains specific configuration used at runtime by the actual system, it should never be exchanged across dev instances via Git - so it is listed for exclusion in `.gitignore`. Instead, the project contains `.default.env` file, which should be copied into `.env` on the dev workstation and then the `.env` edited as needed. Realistically, `.default.env` is the `.env` file for a typical dev workstation, pointing to the local resources and listing default names and test passwords. 
 
 So, even though we like, use and support the 12-Factor configuration paradigm, it really shines when applied in the production deployment, where the configuration is sourced from the orchestration environment's service discovery and gets passed into the individual containers' OS Environment. At the dev stage, we maintain a stencil `name=value` configuration file that serves multiple purposes: it lists the configuration variables in scope of the project, contains common dev defaults, can be copied and used to run the NodeJS process via the command line or to control Docker container's OS Environment. Note, that Docker sets the OS Environment of the container once - when the container is created.
+
+## .env File Use For docker-compose
+
+By default, `docker-compose` will read `.env` present in the directory it runs from to get values for Environment variables which are not already set in the OS Environment 
