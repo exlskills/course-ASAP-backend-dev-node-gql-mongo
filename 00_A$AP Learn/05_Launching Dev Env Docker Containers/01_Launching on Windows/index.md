@@ -54,7 +54,7 @@ We're exposing container's port `80` on host port `8080`.
 
 Note, that `-v C:/docker_vol/gql_app:/myapp` contains a path on the left (host) side - this indicates sharing of a specific folder vs. a Docker volume as we did for the `mongo` container. Alternatively, a Docker volume can be created ahead of time, linked to the folder we need to share.
 
-`tail -f /dev/null` is a dummy daemon command that puts the container into an infinite waiting loop. Run `docker stats` command to see the resource utilization by the containers. `node-dev` takes up a tiny memory slice and zero CPU when running in this "dummy" daemon mode. 
+`tail -f /dev/null` is a dummy daemon command that puts the container into an infinite waiting loop. Run `docker stats` command to see the resource utilization by the containers. `node-dev` takes up a tiny memory slice and zero CPU when running in this "dummy" daemon mode. Notice, that by the `LIMIT` of memory may be lower than the total available RAM capacity of your box. Infamously, Docker on Windows sets up defaults that may be insufficient for your Docker-based Devstack (if you have lots of containers running), so you should keep that in mind and check whether the limit can be increased (out of scope of this course).
 
 Let's get into `node-dev` shell. From the host's terminal shell CLI, run:
 ```
@@ -75,6 +75,7 @@ If you're curious what Operating System you're working in, run `cat /etc/*-relea
 
 `exit` ends your terminal bash session and puts you back into the host's shell.
 
+What is `-it` in the `docker exec` (may also be seen in `docker run`)? One answer can be, "`-it` means we're using the IT Professional mode". In practical terms, `-it` is the opposite of the `-d` *daemon* mode of the container: you get both `-i` input open and `-t` for *tty*, so you can use the container's terminal. You can either launch a container in the `-it` mode and start `bash` form the get go, or you can `exec` `bash` in the `-it` mode on a container launched in the `-d` mode. Note, that some (unix) containers are built from images that do not have `bash` enabled, so you'd need to try other shells.
 
 Now that we have the dev containers running, we are ready for the action!
 

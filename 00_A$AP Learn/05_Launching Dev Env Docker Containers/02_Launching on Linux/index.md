@@ -79,6 +79,7 @@ Along the same lines, we build our own image from `node:8`, we can set `/myapp` 
 
 `exit` ends your terminal bash session and puts you back into the host's shell.
 
+What is `-it` in the `docker exec` (may also be seen in `docker run`)? One answer can be, "`-it` means we're using the IT Professional mode". In practical terms, `-it` is the opposite of the `-d` *daemon* mode of the container: you get both `-i` input open and `-t` for *tty*, so you can use the container's terminal. You can either launch a container in the `-it` mode and start `bash` form the get go, or you can `exec` `bash` in the `-it` mode on a container launched in the `-d` mode. Note, that some (unix) containers are built from images that do not have `bash` enabled, so you'd need to try other shells.
 
 Now that we have the dev containers running, we are ready for the action!
 

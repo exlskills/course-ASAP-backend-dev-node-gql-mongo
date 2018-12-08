@@ -43,7 +43,7 @@ npx babel-node src/data-seed/user-seed.js
 
 There may be a few-seconds delay after launching the command till the detailed debug logging fills the screen, but overall the process completes fast.
 
-Yes!!! We got it kicking
+Yes!!! We've got it kicking
 
 ## Check Out The Database Via Compass
 
