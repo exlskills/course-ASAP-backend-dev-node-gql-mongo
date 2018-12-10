@@ -63,3 +63,5 @@ Back to the `execDetails.queryFunction` call, we also pass:
 
 - `args.filterValues` directly from the query (this is included mostly for system-to-system type of interfaces; it is not a good practice opening direct query access to users, so this parameter is ignored in the DB query builders in the demo)
 - `aggregateArray` - the evaluated combination of `sort` and `limit` per the user query and `skip` based on where we want the dataset returned by the database query to start
+
+Next, will look at the argument types defined in `src/relay-queries/input-types-get-query.js` to see how to control values in client query input
