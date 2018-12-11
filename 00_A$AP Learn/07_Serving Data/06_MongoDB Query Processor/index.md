@@ -91,3 +91,5 @@ id: globalIdField('User', obj => obj._id),
 The `edge`, `node` and `cursor` get populated by the logic coded in `src/paging-processor/connection-from-datasource.js`.
 
 Lastly, `interfaces: [NodeInterface]` in the `src/relay-models/user-type.js` links to some code in `src/relay-models/node-definition-types.js`, which is not maintained in the demo. By the GraphQL engine design, this interface can be used to provide a default method of retrieving a GraphQL model from the MongoDB database. This functionality is not used in the demo - all queries have resolvers that implement the fetching. However, the definition is included into the Object Type schema.
+
+`listUsers` looks very simple to implement - and it is. Let's now look at a "complex" query that lists Orders and Order Items for a User. If you recall from previous chapters, Order Items will act as a *sub-query*, with its *own paging*. Sounds very difficult. Well, you'll be disappointed again - it is very simple, border line primitive, to code. With JS and MongoDB - what else to expect?
