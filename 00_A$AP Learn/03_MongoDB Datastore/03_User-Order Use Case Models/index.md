@@ -71,11 +71,11 @@ This indicates that any multi-property object can be placed into the `item_detai
 A more controlled way of Object embedding is seen here:
 ```
     item_price: {
-      type: ItemPrice,
+      type: [ItemPrice],
       required: true
     }
 ```
-`ItemPrice` is a Schema defined in another file (`src/db-models/item-price-model.js`) and imported at the top of the `src/db-models/item-price-model.js`
+`ItemPrice` is a Schema defined in another file (`src/db-models/item-price-model.js`) and imported at the top of the `src/db-models/item-price-model.js`. The `[]` indicate that `item_price` is an array of `ItemPrice` objects - from the business use case standpoint, there may be multiple prices defined for an item, e.g. by dates or discount type, etc.
 
 # Item Price Model (Schema only)
 

@@ -1,4 +1,4 @@
-### ListUsers Query
+### listUsers Query
 
 With the GraphQL server running in `node-dev` container's shell, open a browser on the host and navigate to the GraphiQL tester `http://localhost:8080/graph`. Copy this query content (from `doc/graphql-grahiql-samples.md`, Queries, List Users) into the left pane of GraphiQL window (replacing the commented out instructions, if you haven't cleared them out before):
 
