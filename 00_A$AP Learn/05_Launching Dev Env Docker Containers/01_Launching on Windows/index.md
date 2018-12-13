@@ -52,7 +52,7 @@ docker run -d --name node-dev -p 8080:80 -v C:/docker_vol/gql_app:/myapp --resta
 
 We're exposing container's port `80` on host port `8080`.
 
-Note, that `-v C:/docker_vol/gql_app:/myapp` contains a path on the left (host) side - this indicates sharing of a specific folder vs. a Docker volume as we did for the `mongo` container. Alternatively, a Docker volume can be created ahead of time, linked to the folder we need to share.
+Note, that `-v C:/docker_vol/gql_app:/myapp` contains a path on the left (host) side - this indicates sharing of a specific folder vs. a Docker volume as we did for the `mongo` container. Alternatively, a Docker volume can be created ahead of time, linked to the folder we need to share. On Windows, the container may lose visibility of the shared drive's content on OS reboots (and, there is no reliable way to prevent Windows from self-rebooting, other than switching to Linux), even as Docker restarts the container per `--restart unless-stopped`. If this happens, a second explicit `docker restart node-dev` should fix the problem.
 
 `tail -f /dev/null` is a dummy daemon command that puts the container into an infinite waiting loop. Run `docker stats` command to see the resource utilization by the containers. `node-dev` takes up a tiny memory slice and zero CPU when running in this "dummy" daemon mode. Notice, that by the `LIMIT` of memory may be lower than the total available RAM capacity of your box. Infamously, Docker on Windows sets up defaults that may be insufficient for your Docker-based Devstack (if you have lots of containers running), so you should keep that in mind and check whether the limit can be increased (out of scope of this course).
 

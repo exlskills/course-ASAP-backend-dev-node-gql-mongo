@@ -15,7 +15,7 @@ What is important about the resolvers, is the parameters that the GraphQL engine
 - `obj` - a GraphQL engine generated object as the output from other query resolvers that might have already run in the overall query processing flow. Applies to queries that are executed inside outlying queries, otherwise - null. Let's wait till we review `listUserOrders` to see how this parameter is used
 - `args` - this is what the client sent us as the *query arguments* 
 - `viewer` - this is the GraphQL engine controlled *context* that we configured to be the object that identifies the *user* executing the query on the client side
-- `info` - a raw detailed representation of the query, we don't use it as we have everything we need organized by the engine into other parameters already, but we are passing it just in case we would ever need it for something
+- `info` - a raw detailed representation of the query, we don't use it as we have everything we need organized by the engine into other parameters already, but we are passing it just in case we would ever need it for something. Although, see a potential use case where `info` can be utilized - at the end of this chapter
  
 ## Viewer-based Security and Validation
 

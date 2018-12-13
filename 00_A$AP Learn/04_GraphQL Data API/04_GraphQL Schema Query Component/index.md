@@ -40,7 +40,7 @@ export const listUserOrders = {
   * `obj` - this is the *source* object, similar to the one used in the Object Type processing. In the context of a query *resolver* (vs. Object Type's *field* resolver), the *source* would only be available if the query is "embedded" into a parent query process - then the *source* here is the return object of the parent query resolver. Otherwise, the `obj` here is a `null`. You will rarely see `obj` used in query resolvers, but we keep the four-parameter signature common in all calls across the project for consistency
   * `args` - the values coming from the client, per the schema definition above
   * `viewer` - the object defining the *user* submitting the query, e.g., the user logged in into the client browser 
-  * `info` - a work object supplied by GraphQL containing request operation information in a raw JSON form. The parameter is not used in the processing and can be omitted
+  * `info` - a work object supplied by GraphQL containing request operation information in a raw JSON form. The parameter is generally not used in the processing and can be omitted. We'll review a use case where `info` can be utilized at the end of this chapter
 
   Note, that in the demo we always explicitly define the for parameters as the arguments to the *arrow function* call. This *short and implicit* notation also works:
   ```

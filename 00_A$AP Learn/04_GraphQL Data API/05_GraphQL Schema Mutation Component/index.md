@@ -29,14 +29,14 @@ export default mutationWithClientMutationId({
       itemObj.item_id = fromGlobalId(item.item_id).id;
       orderObj.order_items.push(itemObj);
     }
-    return createOrder(orderObj, viewer).then(returnObj => returnObj);
+    return createOrder(orderObj, viewer);
   }
 });
 ```
 
 Although the syntax looks different, the structure has the same components as a query definition: input, output, processing function.
 
-`mutateAndGetPayload` here is coded slightly differently from `resolve` in queries. In `resolve`, we were calling an async function passing the four parameters `(obj, args, viewer, info)`. Here, we have three parameters going into the processing function - as the concept of *source*-`obj` would not apply. On return, we are adding `then` after the call to async processing function `createOrder` as otherwise the implementation of `mutateAndGetPayload` in `mutationWithClientMutationId` appears to be unable to wait for `createOrder` completion by itself, as query's `resolve` does. `then` in this case is the waiting component that holds off `return` till `createOrder` completes.
+`mutateAndGetPayload` here is coded slightly differently from `resolve` in queries. In `resolve`, we were calling an async function passing the four parameters `(obj, args, viewer, info)`. Here, we have three parameters going into the processing function - `(inputFields, viewer, info)` - as the concept of *source* `obj` does not apply. 
 
 The middle part of `mutateAndGetPayload` converts Relay Global IDs into the MongoDB IDs. The reason it's done here vs. in `createOrder` is to isolate GraphQL-specific work (like `fromGlobalId`) from the business and DB logic, whenever possible.
 
