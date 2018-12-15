@@ -28,7 +28,7 @@ This course teaches you modern JS only as it applies to writing effective backen
 
 If `then` was not so clear for you, Promises may just turn you completely off from learning JS. The good news is that you don't have to use Promises (*explicitly*) in your modern JS code if you don't want to. 
 
-Shaking off the convoluted naming conventions and long theoretical explanations, you do understand that in software there are functions that *return* something that becomes actually available only when the long-running procedure inside the function completes, and it is not known what exactly the return will be till then. In an asynchronous system, the surrounding code may be doing something else while the function is still running. What's the best way to write code then that would behave differently depending on that other (asynchronous) function's state? The common agreement is to treat the return of the asynchronous function as *Future* - not immediately known at a particular moment, but eventually. Java 8 uses exactly `Future`, whereas JS uses the term `Promise` - that's all it is.
+Shaking off the convoluted naming conventions and long theoretical explanations, you do understand that in software there are functions that *return* something that becomes actually available only when the long-running procedure inside the function completes, and it is not known what exactly the return will be till then. In an asynchronous system, the surrounding code may be doing something else while the function is still running. What's the best way to write code then that would behave differently depending on that other (asynchronous) function's state? The common agreement is to treat the return of the asynchronous function as *Future* - not immediately known at a particular moment, but eventually. Java 8 uses exactly `Future` (java.util.concurrent.Future), whereas JS uses the term `Promise` - that's all it is.
 
 To further clear up the JS Promise terminology, at any given time during the runtime execution, the async function's return value (the Promise) can be:
 
@@ -41,7 +41,6 @@ A JS async function can be explicitly written to return a Promise object. Howeve
 The critical importance of *rejecting the Promise* is on the error handling side. Think of *rejected* Promise as of a *thrown* error, in the classic Java terms. The ultimate method to keep the code clean and clear with either thrown errors or rejected Promises is the familiar `try/catch`. 
 
 Once you get comfortable enough with JS, reading and understanding code with Promises won't be an issue.
-
 
 So, if someone tells you that JS is not a production-strength language and it is hard to learn for a classically trained dev - they are likely way behind the curve on what the modern JS is these days.
 

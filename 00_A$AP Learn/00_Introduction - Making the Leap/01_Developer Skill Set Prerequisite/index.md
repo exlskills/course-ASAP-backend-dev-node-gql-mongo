@@ -4,7 +4,7 @@ This course is for an IT professional who spent at least a few years working wit
 
 - Computer Operating System concepts: CPU, Memory, Ports, File System and I/O
 - Communication Protocols: TCP, HTTP, HTTPS
-- Terminal, Command Line Shell, User, Group, Environment Variables
+- Terminal, Console, Command Line Shell, User, Group, Environment Variables
 - Program structure and components: variables, statements, functions, objects
 - Program runtime: launch, input, output, logging, daemon mode
 - JSON and YAML formats
