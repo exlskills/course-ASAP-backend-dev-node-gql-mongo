@@ -30,5 +30,7 @@ So, `docker build` is a complex process (lots fo room for improvement), but the 
 
 The commands have a long (hugely long) list of parameters that control host-container coordination: shared volumes, use of networking and ports. Alternatively, `docker-compose` is designed to manage the parameters in a YAML file, for a group of containers vs. one at a time - different flavours of the same tech foundation.
 
+In the demo project, we do not *build* any images, just use standard ones, so there will be no `docker build`. But the other two commands will be used quite a lot.
+
 
 Containers are cool, but their real value shines when it gets to *container orchestration* - let's look at that next!
