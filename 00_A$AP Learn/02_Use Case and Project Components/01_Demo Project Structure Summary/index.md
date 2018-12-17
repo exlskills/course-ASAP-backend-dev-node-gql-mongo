@@ -1,15 +1,22 @@
-### Git NodeJS Project Components 
+### Demo Git NodeJS Project and Its Components 
 
-A typical Git NodeJS project consists of a number of standard configuration files, named accordingly to the convention, default and installation-specific custom configuration files, one top level folder where all JS code is located and, optionally, folders for scripts and docs. 
+A typical NodeJS project consists of
 
-As part of the installation, all required 3rd party software packages are loaded into a separate folder at the root of the project by a Package Manager. In this course, we use `npm`. Another commonly used tool is `yarn`.
+- standard configuration files, named accordingly to the convention
+- custom configuration files 
+- top level JS code folder with the code tree inside of it, in sub-folders. We'll see later why a single code folder is convenient - easier to process the code by the pre-compiler like tool `babel`
+- folders for scripts and docs
+- `node_modules` folder where all required external / 3rd party software *packages* are loaded into during the project *install* step. The load is facilitated by *Package Manager* software: we use `npm` in this course; another popular one is `yarn`
 
-The main reason behind placing all JS code into one top level folder is to ensure everything gets converted into the version required by NodeJS when the `babel` process is run.
+Surely, we'll use Git to manage the project. Every Git project must have:
 
-Every Git project must have a Readme file written with the use of Markdown formatting, as well as a Licence description file: assume that you always write Open Source code anyone has access to and may decide using for some purposes. Although, backend code can technically be shielded - write it as it is not.
+- a Readme file written with the use of Markdown formatting
+- a Licence description file: assume that everything you code these days is an *Open Source*: anyone has access to your code and may decide using it for some purposes, as you define in the Licence
 
-Next, we will take a closer look at the individual components of the demo project.
 
-Till you get to the hands-on chapter "Launching Dev Env Docker Containers", you can use [EXLcode Chrome extension](https://chrome.google.com/webstore/detail/exlcode-vs-code-based-onl/elcfpiphmolcddmecegalaikjiclhdjc?hl=en) to view the demo project directly from the [EXLskills GitHub repository](https://github.com/exlskills/demo-gql-mongo). 
+At this point we are ready to start reviewing the demo project structure in more details. You can *fork* the [EXLskills GitHub repository](https://github.com/exlskills/demo-gql-mongo) of the project into your own GitHub repository. The [EXLcode Chrome extension](https://chrome.google.com/webstore/detail/exlcode-vs-code-based-onl/elcfpiphmolcddmecegalaikjiclhdjc?hl=en) lets you viewing any project content directly from the GitHub in a VSC-like editor, so there is no need to *clone* the project locally onto your laptop just yet. In general, the habit of bringing code locally before doing anything with it is a thing of the past. You can get to everything you need to review directly from your browser and only *clone* repos you really need to work with. Having the full search and IDE editor capabilities with EXLcode extension makes code on GitHub as accessible as local.
 
-As you're launching the project on your dev box, you can *fork* the demo repository into your GitHub account or *clone* it locally directly from the EXLskills repo.
+This course will require very little typing. Arguably, modern development is more about *understanding* the code than *writing* it. So, you will be *reviewing* the code already written and then pull it in locally to do meaningful hands-on - in the later chapter "Dev Environment in Docker Containers".
+
+
+In JS, project configuration is very important and it tells you a lot about what the project does and how. So that will be the place for us to go into next

@@ -1,9 +1,17 @@
-### Course Sample Use Case 
+### The Course Sample Use Case 
 
-A backend use case usually includes a front end (FE) piece as means to invoke the functionality. Luckily, GraphQL API comes with a built-in data access facility, so we can build a complete solution and view it in action without having to code or borrow a FE app. 
+A backend use case usually includes a front end (FE) piece as means to invoke the functionality. Luckily, the *GraphQL API* that we employ as the backbone, comes with a built-in data access facility, so we can develop a complete solution and view it in action without having to code or borrow a FE app. 
 
-Would not it make more sense building a backend a FE together? After all, one of the benefits of using JS in the backend is said to be an alleged code reusability between the two parts of the overall solution. The main reason this course is backend-only is that modern FE technologies are very specialized and represent complete frameworks vs. just methods or recommendations on how to code a browser-side application in JS (or TS). Choosing, understanding, learning such a technology is a separate task that requires quite a lot of specialized knowledge, and then the methods evolve so fast that code written 12-15 month ago is simply not maintainable or upgradable anymore. Doesn't sound like a field to venture into in your first re-tooling course from legacy to modern dev. Don't worry, there is enough work in the backend, which is generally considered a harder skill to learn - when starting from zero IT experience. Yet, once you master the modern backend and get more familiar with JS and surrounding tech, getting how the FE works, and you should be able to pick a specific tech that makes more sense to you as a professional vs. following "advise" of someone fresh out of a coding camp.
+Though, wouldn't it make more sense building a backend and a FE together? After all, one of the benefits of writing the backend in JS is the alleged code reusability between the two "ends" of the overall solution. This course is deliberately backend-only. Modern FE technologies are complex and specialized frameworks. Choosing, learning and understanding such a technology is a task that requires quite a lot of preparation and background knowledge. Nowadays, FE frameworks evolve so fast that 12-15 month old code is hardly maintainable or upgradable anymore. Doesn't sound like a field to venture into in your first legacy-to-modern retooling course. Don't worry, there is enough work in the backend, and it is often considered a harder skill to gain - for IT newcomers, those without the professional foundation that you have.
 
-So, the use case for this course is a simple Sales Order Entry: Customers, Items, Orders. We will call Customers Users, as a modern application is self-service oriented. The User gets access to the system, picks the Items, creates the Order; the Order is stored in the database can be retrieved via the API.
+ Once you master the modern backend and get more familiar with JS and related techs, getting how the FE works will be much easier. If after completing this course you decide that "full stack" is where your dev career should go, with the knowledge gained here, you'll feel much more comfortable reviewing FE frameworks and choosing one that makes more sense to you as a professional vs. following an "advise" from someone fresh out of a coding camp.
 
-Let's start coding!
+
+## So, What is The Use Case We Are Going to Code?
+
+Sales Order Entry: Customers, Items, Orders. We will call Customers *"Users"* - as modern applications are always self-service oriented. 
+
+Here's the business process flow in scope: the User gets access to the system, picks Items, creates an Order; the Order is stored in the database and can be retrieved via the API.
+
+
+Next, we'll start working with the actual code!
