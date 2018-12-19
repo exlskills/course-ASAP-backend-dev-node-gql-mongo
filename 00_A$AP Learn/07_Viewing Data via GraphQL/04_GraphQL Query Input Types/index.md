@@ -36,6 +36,7 @@ Notice the use of GraphQL standard types, like `GraphQLEnumType` - we've seen si
 ## Note on GraphQLDateTime
 
 Somehow, Date/Time has not been included into the `graphql` package, so we use a 3rd party one when we need to:
+
 ```
 import { GraphQLDateTime } from 'graphql-iso-date';
 ```
@@ -45,6 +46,7 @@ GraphQL documentation talks about [Scalar types](https://graphql.org/learn/schem
 ## Query Resolver Arguments
 
 This part of `listUsers` query definition enables passing a generic `name-value` list from the client:
+
 ```
     resolverArgs: {
       type: inputTypes.QueryResolverArgsType
@@ -52,6 +54,7 @@ This part of `listUsers` query definition enables passing a generic `name-value`
 ```
 
 `QueryResolverArgsType` custom type is defined as a `GraphQLList`:
+
 ```
 export const QueryResolverArgsType = new GraphQLList(
   new GraphQLInputObjectType({
@@ -65,8 +68,9 @@ export const QueryResolverArgsType = new GraphQLList(
 ```
 
 In a client query, the syntax for passing `resolverArgs` would look like:
+
 ```
-myQuery(<some args>, 
+sampleQuery(<some args>, 
   resolverArgs: [{param: "name", value: "John"}, {param: "email", value: "jp@example.com"}] ,
   <some more args>){
    <fields to return>
@@ -86,9 +90,11 @@ export const userQueryArgsType =
   })
 ;
 ```
+
 which would evaluate to a more readable format on the query side:
+
 ```
-myUserQuery(<some args>, 
+sampleQuery(<some args>, 
   userArgs: {
        {name: "John"}, email: "jp@example.com"}
      } ,
@@ -97,9 +103,10 @@ myUserQuery(<some args>,
 }
 ```
 
-In practice, it appears that GraphQL does not enforce the use of Input Types as query arguments, although documentation and official samples recommend doing so. We can list fields with *Scalar* types directly in the `args` section of a query definition, something like
+In practice, it appears that GraphQL does not enforce the use of Input Types as query arguments, although documentation and official samples recommend doing so. We can list fields with *Scalar* types directly in the `args` section of a query definition, something like:
+
 ```
-export const getUser = {
+export const getUserSampleQuery = {
   type: UserType,
   description: 'User',
   args: {
@@ -115,9 +122,10 @@ export const getUser = {
 };
 ```
 
-Then the client query will look like
+Then the client query will look like:
+
 ```
-getUserQuery( name: "John", email: "jp@example.com")
+getUserSampleQuery(name: "John", email: "jp@example.com")
 }
    <fields to return>
 }
@@ -126,6 +134,7 @@ getUserQuery( name: "John", email: "jp@example.com")
 ### filterValues Argument
 
 This argument is a string:
+
 ```
 export const FilterValuesType = new GraphQLInputObjectType({
   name: 'FilterValues',
@@ -135,9 +144,16 @@ export const FilterValuesType = new GraphQLInputObjectType({
 });
 ```
 
-As we saw earlier, the generic paging procedure passes it directly into the database query function where it can be added on to the query builder, if coded so by the dev. This looks like a powerful way to allow constructing actual free-form DB queries on the client, using MongoDB syntax. However, in general web development passing unedited strings into the DB engine is absolutely forbidden. If you're building a fully-controlled communication flow with trusted intelligent clients - sure, you may choose to code parts of your query logic on the client in the MongoDB syntax and pass into the server flow via an argument like this
+As we saw earlier, the generic paging procedure passes it directly into the database query function where it can be added on to the query builder, if coded so by the dev. This looks like a powerful way to allow constructing actual free-form DB queries on the client, using MongoDB syntax. However, in general web development passing unedited strings into the DB engine is absolutely forbidden. If you're building a fully-controlled communication flow with trusted intelligent clients - sure, you may choose to code parts of your query logic on the client in the MongoDB syntax and pass into the server flow via an argument like this:
 
+```
+getOrdersSampleQuery( filterValuesString: "{\"order_items.item_id\": \"1HEOx6FnC7cM\"}")
+}
+   <fields to return>
+}
+```
 
 So, we've looked at the arguments and along the way reviewed how to write the return fields portion of a client query. You can try removing individual fields from the `listUsers` sample you run in GraphiQL and execute the query again - those fields will not be included into the returned dataset in the right pane. As simple as that. Also, if you add fields that don't exist in the schema - GraphiQL will complain and won't allow launching the query.
+
 
 Next, let's look at how the query is actually processed by the server engine

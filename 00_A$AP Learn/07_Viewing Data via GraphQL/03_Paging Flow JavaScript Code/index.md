@@ -28,6 +28,7 @@ Sounds like running the query two times is a bad approach? Well, we only do that
 ## Where This Code Is?
 
 `src/paging-processor/find-with-paging.js` is the core place where the database query function gets called:
+
 ```
     return await execDetails.queryFunction(
       args.filterValues,
@@ -53,6 +54,7 @@ const execDetails = {
 The "business key" of the MongoDB document, in the context of the query, is `_id` (this is the case most of the time, but not necessarily always - there maybe other fields in the MongoDB schema that are *unique* relatively to what the query returns, especially if the return set doesn't directly correspond to a DB Document - where the `_id` is defined).
 
 The function that runs the MongoDB query is `fetchUserList`, and it is imported into this JS file as you can see at the top:
+
 ```
 import { fetchUserList } from '../db-handlers/user/user-list-fetch';
 ```
@@ -63,5 +65,6 @@ Back to the `execDetails.queryFunction` call, we also pass:
 
 - `args.filterValues` directly from the query (this is included mostly for system-to-system type of interfaces; it is not a good practice opening direct query access to users, so this parameter is ignored in the DB query builders in the demo)
 - `aggregateArray` - the evaluated combination of `sort` and `limit` per the user query and `skip` based on where we want the dataset returned by the database query to start
+
 
 Next, will look at the argument types defined in `src/relay-queries/input-types-get-query.js` to see how to control values in client query input

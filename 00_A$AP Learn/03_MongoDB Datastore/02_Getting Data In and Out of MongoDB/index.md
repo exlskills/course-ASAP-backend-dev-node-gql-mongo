@@ -18,11 +18,20 @@ As a rule of thumb, the developer should assume that an individual Document is a
 It is not uncommon using multiple databases in a single application that handle various functionality, e.g., an RDBMS may be employed to handle Product Stock multi-steps commitments and issues, MongoDB - manage supporting documents, and Elasticsearch - enable open-text Product Catalog discovery. Those separate databases would be loosely integrated via near real-time, unblocking replication systems. Only one database would act as the system of record for each particular data category: the Inventory would be in the RDBMS, Product Categories - in MongoDB. Product features and descriptions - in MongoDB as the system of record and also in the Elasticsearch to run text queries against.
 
 
-### Advanced Query Functionality - Aggregations
+### Query Functionality - Find and Aggregations
 
-In addition to a single-statement form of queries via the `find` command and its variations, MongoDB provides an  advanced mechanism extracting the data in a series of commands and operations executed as an *aggregation pipeline*. In practice, Aggregations, once understood by the dev, seem like a much cleaner and more powerful way to approach Query writing than the single statement form. Although, the single statement form enables pipeline-like options as well, e.g., sorting, limiting the number of records returned, *projecting* - specifying which fields to include into the result, Aggregations are practically unlimited in what can be done with the data. Aggregations is the method to *link* data from multiple Collections, effectively filter out irrelevant parts of the Documents or add calculated fields to the output, with the use of conditional statements and variables. 
+A basic MongoDB query (and equivalent of SQL SELECT) is executed on a Collection via the `find` command that takes a *filter* argument as well as additional parameters that define return dataset sorting and shaping rules. 
 
-Aggregations may look quite confusing and hard to debug at first - but as the process in the Aggregation is done in discrete steps - when writing or debugging, results of each step can be printed out and reviewed before writing the next step.
+How about something more sophisticated, e.g., similar to a PL-SQL procedure that can execute a multi-step logic directly in the database, without pulling intermediate results into the app? This would be MongoDB *Aggregation*. In its practical form, Aggregation is a series of commands and operations executed as an *aggregation pipeline* - one after another, passing intermediate datasets seamlessly between the steps.
+
+Somewhat unfortunate, *filtering* syntax inside aggregation steps does not always match that in `find`, but, of course, pretty close. There are quite a lot of things that can be *coded* in the pipeline, in addition to filtering, *unwinding* (that we looked at earlier) and sorting. The useful ones we'll see in the demo project
+
+- conditionally including or excluding fields from the result
+- renaming fields to drop the dotted notation of embedded objects
+- adding dynamically calculated fields to the result
+- *joining* Collections via the *$lookup* command 
+
+Aggregations may look quite confusing and hard to debug at first. The good news is that in development and testing, the pipeline can be "stopped" to see the intermediate result - by literally commenting out its remaining tail. So, aggregations *are* difficult to code, especially the first few ones, but do assume that you will *have* to use them working with MongoDB in a professional backend developer capacity.
 
 
-Will see some interesting examples on using Aggregations in the demo code. Next - a quick overview of `mongoose`
+Will see some interesting examples on using Aggregations in the demo project code. Next - a quick overview of `mongoose`

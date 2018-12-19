@@ -64,6 +64,7 @@ var connectionType = new _graphql.GraphQLObjectType({
 ```
 
 and 
+
 ```
 var edgeType = new _graphql.GraphQLObjectType({
     name: name + 'Edge',
@@ -93,4 +94,5 @@ Lots of words are in here that we've seen in the schema, in the query we put in,
 - cursor
 - pageInfo
 
-Perfect time to get all of this straight, so we can continue to the more interesting stuff
+
+Perfect time to get all of this straight, so we can continue on to more interesting stuff

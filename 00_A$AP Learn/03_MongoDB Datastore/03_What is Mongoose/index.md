@@ -1,19 +1,44 @@
-### Data Access Layer
+### Mongoose As The Data Access Layer
 
-The role of `mongoose` is to act as the data access layer - bridging the JS code and the MongoDB storage layer. In the RDBMS world, the data access layer API is expected to be fast, transparent, neutral to the way the solution is implemented on the either side of it. `mongoose`, on the other hand, is actually viewed as a complementary extension making work with MongoDB more structured and organized vs. just passing the data back and fourth. 
+The role of `mongoose` is to act as the data access layer - bridging JS code and the MongoDB storage layer. 
 
-The `mongoose` "intelligence" certainly makes it an additional external dependency point in your solution, so if you prefer more direct control over your data layer - skip it and use something like the [MongoDB Node.JS Driver](https://mongodb.github.io/node-mongodb-native/)
+Thinking of something like *JDBC* in the RDBMS world, the data access layer is expected to be fast and transparent - almost invisible. `mongoose`, on the other hand, is actually designed to act as a complementary extension to MongoDB, making it more structured and organized - vs. just passing data back and fourth. 
 
-In the latest versions, `mongoose` has caught up with the `async/await` JS coding paradigm.
+The `mongoose` "intelligence" certainly makes it a significant additional external dependency for the implemented solution, so for those who prefer sticking with a *thin* data access layer - skip `mongoose` and use [MongoDB Node.JS Driver](https://mongodb.github.io/node-mongodb-native/)
 
-All operations in `mongoose` are done after a connection to the DB is established (although, due to the *buffering* feature, you can work off-line for some time). Conveniently, `mongoose` keeps the connection *alive* by default, so that the connection doesn't time out. Just like many other DBs, MongoDB does limit the number of active connections: check your Atlas tier specifications (you'll find the limit quite generous). By default, `mongoose` creates a 5-connection pool to the DB for multi-threading. This may potentially affect the I/O if you do frequent partial Document updates very close to each other, but rather hypothetically. 
+In the latest versions, `mongoose` has caught up with the `async/await` JS coding paradigm, so that is the mode used in the demo project.
 
-The Collections are accessed via `mongoose` *Models*, which are built from *Schemas*. The Schema contains all the field-level definitions and properties for the Document, like types, defaults, and much more. Per `mongoose` documentation, Documents are instances of Models, which makes sense on the JS side, although, the necessity of the Schema layer seems questionable: why not just put the definitions directly into the Model? One clue may be that not every Schema is equal to a Model: embedded objects can be defined in a separate Schema and reused in multiple parent Schemas. MongoDB uses the Schema and Model concepts as well, but MongoDB Model is as logical as the Schema, unlike in `mongoose`.
 
-All `mongoose` CRUD operations are executed on a Model. There are Schema-level operations, e.g., to define indexes. So, at a minimum, each Collection being accessed from the app via `mongoose` must be listed as a Model. `mongoose` will help converting data types and defaulting values, including generation of *Created At* and *Updated At* timestamps. Although, Updated At is ignored in some operations. `mongoose` will also validate data adherence to the Schema, unless explicitly bypassed.
+## DB Connection 
 
-To invoke the async mode for each call vs. the `then` mode, use the `exec()` method passing the commands to the DB - you'll see that used throughout the demo code.
+First thing when running 'mongoose' is establishing the DB connection. Here's surprise #1: due to its *buffering* feature, `mongoose` may start executing pieces of code like queries or updates in the *off-line mode* - before the DB connection is in place. It is one thing to work off-line if an established connection flickers, but start processing data *before* the DB acknowledges and authenticates - sounds crazy. Well, apparently, this is a feature of the MongoDB Node.js Driver. Buffering can be disabled by setting `bufferMaxEntries` to 0 and `bufferCommands` to false in the connection properties. In the demo project, the default buffering is kept - as the app is coded to shut down if the initial `mongoose` connection can't be established. The expectation is that the app won't get too far while the connectivity is pending to worry about this feature.
 
-In the Debug logging mode, `mongoose` prints out the details of operations and statements - very convenient in the dev process.
+Conveniently, `mongoose` keeps the connection *alive* by default, so that it doesn't get timed out by the MongoDB server while the app is idle. 
 
-We'll look at the common `mongoose` usage scenarios in the latter chapters, starting with the Schemas and Models in the demo project in the next lesson, read on
+Keep in mind, like many other DBs, MongoDB does limit the number of active connections: check your Atlas tier specifications (you'll find the limits quite generous). By default, `mongoose` creates a 5-connection pool to the DB for multi-threading. Parallel processing may potentially affect the results if you run frequent, very close to each other, partial Document updates and/or query Documents being updated - but rather hypothetically. As mentioned earlier - MongoDB is not your platform to implement transaction-dependant flows.
+
+
+## DB Schema
+
+MongoDB Collections are accessed via `mongoose` *Models*, which are built from *Schemas*. A Schema contains all field-level definitions and properties of a Document: types, defaults, and much more. 
+
+Per `mongoose` documentation, Documents are JS Objects that are *instances* of `mongoose` Models - makes sense on the JS side. The necessity of the Schema layer, though, seems questionable: why not just put the definitions listed in the Schema directly into the Model? One clue may be that not every Schema is equal to a Model: embedded objects can be defined in a separate Schema and reused in multiple parent Schemas. Also, *Model* in `mongoose` is described as a *constructor* compiled from *Schema*. Whatever.
+
+MongoDB widely uses both Schema and Model concepts as well, but MongoDB Model is not a concrete element like it is in `mongoose` - just a term used when describing design patterns.
+
+Basically, trying to make a lot of sense cross-referencing terminology between MongoDB and `mongoose` is not necessary to use the tool efficiently: you just write some code following a few simple patterns, like those plentiful in the demo project. 
+
+
+## CRUD
+
+All `mongoose` CRUD operations are executed on a `mongoose` Model (which is MongoDB Collection, see the above). There are Schema-level operations, e.g., to define indexes. So, at a minimum, each Collection being accessed from the app via `mongoose` must be present in the JS code as a `mongoose` Model. `mongoose` will help converting data types and defaulting values, including generation of *Created At* and *Updated At* timestamps. Although, beware, Updated At is left unchanged by some C-U-D operations. `mongoose` will also validate data adherence to the `mongoose` Schema, unless explicitly bypassed.
+
+To invoke the async mode for each call vs. the old style `then` mode, use the `exec()` method to the command to the DB - you'll see examples throughout the demo project code.
+
+
+## Logging
+
+In the Debug logging mode, `mongoose` prints out details of operations and statements - very convenient for dev and troubleshooting.
+
+
+We'll look at the common `mongoose` usage scenarios in the latter chapters, starting with review of the demo project Schemas and Models in the next lesson, read on!

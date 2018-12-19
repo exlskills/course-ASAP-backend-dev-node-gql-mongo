@@ -123,5 +123,11 @@ The demo provides examples of `import` and `export` usage that come from various
 JS syntax and styling considerations evolve, just pick something you feel comfortable with - you can always change it working on your next project (and you very likely will). And then change again.
 
 
+## Is Imported Code Auto-executed?
+
+If you know a little Python, you've seen how *imported* code is actually *auto-executed* in there. Not in many other languages. Not in JS.
+
+However, you may see wierd things happening in JS when some code appears to be kicked off by virtue of *importing* something from the file the code is located in. This is done by the *Evaluation* process. The topic is gray enough to keep away from, and the impact of Evaluation on backend JS code is not something you see widely discussed. JS is an *interpreted* language. NodeJS evaluates modules before running them, and when modules are evaluated, *loose* code gets executed. E.g., if you put some bare logging statements in JS code files, outside exported blocks, you'll see those statements printed on startup. So, don't put any random loose code into the JS file. Keep the files neat with import statements and export blocks. 
+ 
 
 After the `import`/`export` warmup, next, we'll review the demo project JS code components
