@@ -1,4 +1,4 @@
-### Sample GraphQL Query Schema
+### GraphQL Query Schema
 
 Let's look at `src/relay-queries/user/user-order-list-query.js`
 
@@ -32,22 +32,25 @@ export const listUserOrders = {
 };
 ```
 
-- `type: UserOrderConnection` defines the *output* Object Type - it is a *Connection* defined in `src/relay-models/user-order-type.js`. As we noted briefly in the previous lesson, Connections are used for paging, when we bring "one page at a time". We'll review Connections work in more details when we talk about serving data
-- `args` - those are the *input* fields the client should be passing with the query. Those of type `GraphQLNonNull` are required, others are optional
-  * `orderBy`, `filterValues` and `resolverArgs` are *custom* *Input* types that we are defining in `src/relay-queries/input-types-get-query.js` and use throughout the project. Those are the inputs into our custom paging engine that we'll review
-  * `...connectionArgs` - in JS, `...` followed by the name of the object is called *spread*. It evaluates to the list of all components of the object. `connectionArgs` comes from `graphql-relay` and controls paging
-- `resolve` defines the query *resolver* function: `(obj, args, viewer, info) => resolveListUserOrders(obj, args, viewer, info)` with these parameters (we'll review them in more details later)
-  * `obj` - this is the *source* object, similar to the one used in the Object Type processing. In the context of a query *resolver* (vs. Object Type's *field* resolver), the *source* would only be available if the query is "embedded" into a parent query process - then the *source* here is the return object of the parent query resolver. Otherwise, the `obj` here is a `null`. You will rarely see `obj` used in query resolvers, but we keep the four-parameter signature common in all calls across the project for consistency
-  * `args` - the values coming from the client, per the schema definition above
-  * `viewer` - the object defining the *user* submitting the query, e.g., the user logged in into the client browser 
-  * `info` - a work object supplied by GraphQL containing request operation information in a raw JSON form. The parameter is generally not used in the processing and can be omitted. We'll review a use case where `info` can be utilized at the end of this chapter
+Here's what we've got:
 
-  Note, that in the demo we always explicitly define the for parameters as the arguments to the *arrow function* call. This *short and implicit* notation also works:
+- `type: UserOrderConnection` defines the *output* Object Type - it is a *Connection* defined in `src/relay-models/user-order-type.js`. As we noted briefly in the previous lesson, Connections are used for *paging*, when the client receives "one page at a time" and has to explicitly request each page in a subsequent query, adjusting the query arguments. We'll review how Connections work in more details when we talk about serving data
+- `args` - those are the query *input* fields the client should be passing with the query. Fields that have `GraphQLNonNull` in their definition are required, others are optional
+  * `orderBy`, `filterValues` and `resolverArgs` are *custom* *Input* types that we define in `src/relay-queries/input-types-get-query.js` and use throughout the demo project. These arguments are used in our implementation of the Relay paging engine that we'll review in detail
+  * `...connectionArgs` - in JS, `...` followed by the name of the object is called *spread*. It evaluates to the list of all components in the object. Object `connectionArgs` comes from `graphql-relay` and controls Relay-defined paging
+- `resolve` defines the query *resolver* function: `(obj, args, viewer, info) => resolveListUserOrders(obj, args, viewer, info)`. Briefly for now, the four arguments are:
+  * `obj` - this is the *source* object, *similar* but *NOT* the same as the one used in the Object Type processing that we saw in the previous lesson. In the context of a *query resolver* (vs. *field resolver* in the Object Type), the *source* would only exist if the query is "embedded" into a parent query process. In that case the *source* here is the return object of the parent query's resolver. Otherwise, the `obj` here is a `null` - just a placeholder, basically
+  * `args` - the values coming from the client, the one listed in the schema definition right above
+  * `viewer` - the object defining the *user* submitting the query, e.g., the user logged in into the client browser. More about this later
+  * `info` - a work object supplied by GraphQL containing request operation information in a raw JSON form. The argument is generally not used in the processing and can be omitted. We'll review a use case where `info` can be utilized at the end of this chapter
+
+  Note, that in the demo we always explicitly define the for arguments as the arguments to the *arrow function* call. This *short and implicit* notation also works:
+
   ```
   resolve: resolveListUserOrders
   ```
 
-  We can omit the list of parameters and the arrow function sign `=>`, just provide the name of the function for the GraphQL engine to call - and it will call it passing the four parameters. Pick whichever notation you prefer, just keep in mind that the short notation assumes that there is nothing else after `resolve:` other than the function name. The arrow function notation lets you put some more code directly into the schema, e.g., 
+  We can omit the list of arguments and the arrow function sign `=>`, just provide the name of the function for the GraphQL engine to call - and it will call it passing the four arguments. Pick whichever notation you prefer, just keep in mind that the short notation assumes that there is nothing else after `resolve` other than the function name. The arrow function notation lets you put some more code directly into the schema, e.g., 
 
   ```
   resolve: (obj, args, viewer, info) => {
@@ -57,7 +60,7 @@ export const listUserOrders = {
   }
   ```
 
-  Once you put `{}` into the arrow function - it becomes a multi-line actual function containing a `return` statement. Without `{}`, you have to limit the writing to the function name with the list of parameters.
+  Once you put `{}` into the arrow function - it becomes a multi-line function that must use an explicit `return` statement. Sometimes it feels like JS shoots itself in the foot allowing all these different variations of the syntax, seemingly, just to save a few characters in the code. Yes, but less characters equate to faster code load into the browser. Whatever the reason is - JS syntax is what we have to live with in this line of work.
 
 
-Lastly, let's take a quick look at how mutations are defined in the GraphQL schema, before jumping into the code and running real flows
+Lastly, let's take a quick look at how mutations are defined in the GraphQL schema, before jumping into the code and running real flows. Very close!

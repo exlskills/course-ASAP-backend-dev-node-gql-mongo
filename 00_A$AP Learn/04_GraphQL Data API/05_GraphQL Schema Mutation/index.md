@@ -1,8 +1,9 @@
-### Sample GraphQL Mutation Schema
+### GraphQL Mutation Schema
 
-See `src/relay-mutations/order/create-order-mutation.js`
+Check out `src/relay-mutations/order/create-order-mutation.js`
 
-The *mutation* definition part is here (note, here we use a relay-specific class `mutationWithClientMutationId` imported from `graphql-relay` package):
+There are a few objects defined in the file that are used closely together. The actual *mutation* definition part is here :
+
 ```
 export default mutationWithClientMutationId({
   name: 'CreateOrder',
@@ -34,14 +35,17 @@ export default mutationWithClientMutationId({
 });
 ```
 
-Although the syntax looks different, the structure has the same components as a query definition: input, output, processing function.
+Note that class `mutationWithClientMutationId` is imported from `graphql-relay` package, so it is Relay-specific.
 
-`mutateAndGetPayload` here is coded slightly differently from `resolve` in queries. In `resolve`, we were calling an async function passing the four parameters `(obj, args, viewer, info)`. Here, we have three parameters going into the processing function - `(inputFields, viewer, info)` - as the concept of *source* `obj` does not apply. 
+Although the syntax looks different, this structure has the same general components as a query definition: input, processing function, output.
 
-The middle part of `mutateAndGetPayload` converts Relay Global IDs into the MongoDB IDs. The reason it's done here vs. in `createOrder` is to isolate GraphQL-specific work (like `fromGlobalId`) from the business and DB logic, whenever possible.
+In `mutateAndGetPayload`, there are three arguments being passed into the processing function: `(inputFields, viewer, info)`. This is similar to a query `resolve` property in queries, where four arguments are passed `(obj, args, viewer, info)`. As the the concept of *source* `obj` does not apply to mutations, `obj` is absent in `mutateAndGetPayload`. 
 
-Mutation input is usually wrapped as *Input Types* - here, we use `OrderInputType`, defined in the same JS file, above the mutation definition. Similarly to Object Types, Input Types act as a buffer and help controlling any necessary conversions before the input data is passed into `mutateAndGetPayload`. 
+Inside the function in `mutateAndGetPayload`, Relay Global IDs are converted into the MongoDB IDs, then `src/relay-mutate-and-get/order-mag.js` `createOrder` is called. The reason the ID conversion is done here vs. in `createOrder` is to isolate GraphQL-specific work from the business and DB logic, whenever possible.
+
+Mutation input is usually wrapped as *Input Types*. `OrderInputType` is defined in the same JS file, above the mutation definition. Somewhat similar to Object Types that map resolver output to the data sent to the client, Input Types act as an extra mapping layer to perform necessary conversions on the incoming client data before it is passed into `mutateAndGetPayload`. 
 
 `outputFields` are similar to the Object Type in queries - they are loaded from the object returned by `mutateAndGetPayload`. In this case, we assuring that `createOrder` returns an object matching the structure defined in `outputFields`.
 
-Enough with the "overview", lets dive into the code now!
+
+Enough with the overview, let's move on to setting up and running the demo project's code next!
