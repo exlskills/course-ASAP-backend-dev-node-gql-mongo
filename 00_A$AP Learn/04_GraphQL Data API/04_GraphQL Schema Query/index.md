@@ -44,7 +44,7 @@ Here's what we've got:
   * `viewer` - the object defining the *user* submitting the query, e.g., the user logged in into the client browser. More about this later
   * `info` - a work object supplied by GraphQL containing request operation information in a raw JSON form. The argument is generally not used in the processing and can be omitted. We'll review a use case where `info` can be utilized at the end of this chapter
 
-  Note, that in the demo we always explicitly define the for arguments as the arguments to the *arrow function* call. This *short and implicit* notation also works:
+  Note that in the demo we always explicitly define the for arguments as the arguments to the *arrow function* call. This *short and implicit* notation also works:
 
   ```
   resolve: resolveListUserOrders

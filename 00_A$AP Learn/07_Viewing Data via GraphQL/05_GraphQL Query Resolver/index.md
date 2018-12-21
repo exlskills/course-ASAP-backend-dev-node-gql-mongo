@@ -36,7 +36,7 @@ The arguments are matched to parameters *by position*, *not by name*. As paramet
 
 The resolver is a good place to code a security layer that would control access to the query function by *viewer* as well as cleanse sensitive data as the DB query returns its result applying some viewer-specific logic. E.g., here we can control that a standard User can only see his/her orders, whereas a Shipping Manager can query all orders in his/her line of work. 
 
-Note, that as individual fields each have their individual *resolver* running after the *query resolver* completion (or the *default* one if none specified in the field definition) - outbound field-level security can be coded in the field resolvers
+Note that as individual fields each have their individual *resolver* running after the *query resolver* completion (or the *default* one if none specified in the field definition) - outbound field-level security can be coded in the field resolvers
 
 
 ## Argument Validation

@@ -33,7 +33,7 @@ Let's review the content of the `package.json` `scripts` section in the demo pro
   },
 ```
 
-The left side represents the name of the "state" or the "command" to be executed via `npm run`, e.g., `npm run update-schema` or `npm run build`. Note, that `npm` has several standard *CLI* commands which are run by placing the command directly after `npm`, e.g., `npm install`, `npm start` - but we have the `start` script in the section as well. 
+The left side represents the name of the "state" or the "command" to be executed via `npm run`, e.g., `npm run update-schema` or `npm run build`. Note that `npm` has several standard *CLI* commands which are run by placing the command directly after `npm`, e.g., `npm install`, `npm start` - but we have the `start` script in the section as well. 
 
 Placing or omitting the `run` seems unnecessary confusing and controversial. Generally, `npm run <script name>` executes just the script, whereas `npm <command name>` runs the full logic associated with the command. `npm` documentation has a full page write up on how individual commands line up against scripts with the same name. Luckily for us and most devs, one would never use this stuff, other than the `start` override, which in our case works fine via `npm start`. Our `start` script acts as an *override* to what the standard `npm start` would do, which is kicking off `node server.js`.
 

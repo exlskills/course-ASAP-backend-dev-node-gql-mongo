@@ -26,7 +26,7 @@ The filter value `fetchParameters.user_id` is passed from the GraphQL query argu
   const fetchParameters = { user_id: user_id_db };
 ```
 
-Note, that the pre-validation is done by calling an imported function vs. using `mongoose` data layer functionality directly in the resolver.
+Note that the pre-validation is done by calling an imported function vs. using `mongoose` data layer functionality directly in the resolver.
 
 The `select` can be used to either list the fields to include into the `mongoose` query output (marking them with a `1`) or exclude (`0`). In this case, `order_items` are excluded
 
