@@ -13,3 +13,6 @@ So, in the User-Order use case, the User is first directed to the *login* compon
 On the authentication endpoint, the User goes through the login steps, the JWT is encoded with the User's info, passed to it in a cookie, and the User is redirected back to the GraphQL server (or where ever the User was before being sent for the authentication). Technically, on the GraphQL server we would not need to keep any potentially confidential User info such as email, or may be anything at all (!). The JWT will have the User ID that we read into the `viewer` object being used everywhere in the GraphQL server flow.
 
 So, consider the User Collection being added for demo purposes only - you will likely not need it in a real multi-server design.
+
+
+Next - logging. Without it we're dead in the water developing, testing, troubleshooting, monitoring. So, logging is the key. Let's get it reviewed - you'll see it is very simple here!

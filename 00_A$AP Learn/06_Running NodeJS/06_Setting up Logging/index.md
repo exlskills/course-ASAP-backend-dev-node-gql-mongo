@@ -10,4 +10,5 @@ However, containerization may be the death for old-stile loggers. Basically, the
 
 So, in the demo project, the use of `winston` is limited to configuring the console output, and the purpose expanding beyond JS `console.log` is strictly to get better formatting capabilities. Although, you'll see `file:` configuration in `src/utils/logger.js` - as it came in with the sample. Can definitely be deleted.
 
-Finally, before we get to running live queries and mutations, a necessary walkthrough how to get the GraphiQL tool working
+
+Finally, before we get to running live queries and mutations, a necessary walkthrough how to get the GraphiQL - our Front End - tool working. A bit convoluted, but not too bad!
