@@ -1,27 +1,39 @@
 ### From Schema to Query Syntax
 
-As we mentioned earlier, the folder structure used for queries and mutations is rather expansive. It demonstrate the approach of exporting and importing layers of code, via `index.js` files, till we finally get to `src/schema.js`, where this code pulls everything in:
+As we saw in "Use Case and Project Components" chapter, in the demo project, the code folder structure related to query and mutation processing is rather expansive. In the design used, there are layers of exporting and importing that separate `src/schema.js` from the files where components are defined. There are quite a few `index.js` files to sort through. If you don't like this approach you don't have to use it. The opposite alternative is to code things right into `src/schema.js` as you can see in some tutorials. Good luck with that if you have more than a couple objects in scope. In a real app, the layered design is probably best to manage the complexity.
+
+So, let's roll from the `src/schema.js` following the trail:
+
 ```
 import queryMap from './relay-queries';
 import mutationMap from './relay-mutations';
 ```
 
-`src/relay-queries/index.js` contains the queryMap:
+`src/relay-queries/index.js` contains the `queryMap`:
+
 ```
 import user from './user';
+import item from './item';
 
 export default {
+  getItem: item.getItem,
+  getUser: user.getUser,
   listUsers: user.listUsers,
   listUserOrders: user.listUserOrders
 };
 ```
-In the map, the public query name (`listUsers`, as used in the browser) is linked to its internal definition and implementation schema.
 
-There is another `index.js` file under `src/relay-queries/user` which imports and exports individual schemas. If you think this layered import-export design is excessive - you can import the query schemas directly where you need them, this just a matter of coding style preferences. The code we're reviewing below is in `src/relay-queries/user/user-list-query.js`
+In the *map*, the public query name to be used in the client, e.g., `listUsers`, is linked to its internal definition and implementation schema, e.g., `user.listUsers`.
+
+Following down the path, `index.js` under `src/relay-queries/user` imports and exports individual query schemas. If you think this layer is excessive, you can import those query schemas directly into `src/relay-queries/index.js` - a matter of coding style preferences. 
+
+Finally, the query definition code that we'll review below is in `src/relay-queries/user/user-list-query.js`
+
 
 ## Query Arguments
 
-The arguments that should be passed to the query are listed in the query schema `args` property:
+The arguments that the client can or must pass with the query are listed in the query schema `args` property:
+
 ```
 args: {
     orderBy: {
@@ -37,13 +49,15 @@ args: {
   }
 ```
 
-Per 'graphql-relay' (`node_modules/graphql-relay/lib/connection/connection.js`), `connectionArgs` are as follows:
+Per `graphql-relay` (`node_modules/graphql-relay/lib/connection/connection.js`; remember, we talked about ownership of `node_modules` on Linux), `connectionArgs` are as follows:
+
 - after
 - first
 - before
 - last
 
-You can get into `connection.js` by clicking on `connectionArgs` in the import statement. You can see lots of interesting stuff in the file, e.g.
+From VSC, you can get into `connection.js` by clicking on `connectionArgs` in the import statement. There is some interesting stuff in the file, e.g.
+
 ```
 var connectionType = new _graphql.GraphQLObjectType({
     name: name + 'Connection',
@@ -95,4 +109,4 @@ Lots of words are in here that we've seen in the schema, in the query we put in,
 - pageInfo
 
 
-Perfect time to get all of this straight, so we can continue on to more interesting stuff
+Perfect time to get all of this straight, so we can continue on to the more interesting stuff. BTW, when working with open-source external packages, reading the code is often (always?) preferred to reading documentation. In open-source, the prevailing mentality is that the users should be active participants and contributors to the software. So, don't be lazy reading (old, outdated and sparse) documentation and complaining about how much everything sucks - get inside the code, figure things out and propose improvements!
