@@ -1,6 +1,6 @@
-### Our Paging Solution for MongoDB
+### Paging Solution Implementation for MongoDB
 
-As we mentioned before, GraphQL does not deliver code that facilitates processes at the data layer, so we either have to find a 3rd party package that does or code our own stuff.
+As mentioned in "GraphQL Data API" chapter, GraphQL or Relay does not deliver any specific code that facilitates processes at the data layer, so we either have to find a 3rd party package that does that or code our own stuff.
 
 This section talks about some pretty deep implementation details that are not directly related to the GraphQL technology but illustrate the scope of work that must be done by the dev. Read on, although, a word of caution - the details are kind of difficult to grasp from the first try. Do your best, if not clear - move on, it will sink in as you work with the code, just get the idea for now.
 
@@ -25,7 +25,7 @@ Here, we count from the beginning of the dataset `|0`, and our records are `|0` 
 
 Sounds like running the query two times is a bad approach? Well, we only do that if the dataset changed or the user changed the way of paging through the *same* data (the user sent us a record from that data to use as the anchor) - in a typical business scenario this would not be happening a lot. 
 
-## Where This Code Is?
+## Where The Code Is?
 
 `src/paging-processor/find-with-paging.js` is the core place where the database query function gets called:
 
