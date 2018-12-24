@@ -27,6 +27,7 @@ query listUserOrders {
   }
 }
 ```
+
 Hit the "Execute Query" run-like looking button on the top bar, next to the GraphiQL logo, and select `listUserOrders` if you have more than one query in the pane. You should get this in the right (result) pane:
 
 ```
@@ -102,7 +103,7 @@ Hit the "Execute Query" run-like looking button on the top bar, next to the Grap
 }
 ```
 
-Everything looks familiar from the what we've already seen working with the `listUsers` query. Notice `item_details` represented as a JSON *escaped* (filled with `\` as needed to preserve double quotes) string. This is by virtue of defining `item_details` as a GraphQLString in the Object Type. Unlike MongoDB, GraphQL requires object structures to be defined in order to display them as response fields. The closest we can get to a flexible structure output - by using `GraphQLUnionType` that enables a field to take one of a few pre-defined Object-like structures. However, in modern software a well formatted JSON is easily converted to an object, so the client should be able to work with this string normally.
+Everything looks familiar from the what we've already seen working with the `listUsers` query. Notice `item_details` represented as a JSON *escaped* (filled with `\` as needed to preserve double quotes) string. This is by virtue of defining `item_details` as a GraphQLString in the Object Type. Unlike MongoDB, GraphQL requires object structures to be defined in order to display them as response fields. The closest we can get to a flexible structure output - by using `GraphQLUnionType` that enables a field to take one of the several pre-defined Object-like structures. However, in modern software a well formatted JSON is easily converted to an object, so the client should be able to work with this string just fine.
 
 
 Next, let's take a look at the underlying code implementation for listUserOrders.
