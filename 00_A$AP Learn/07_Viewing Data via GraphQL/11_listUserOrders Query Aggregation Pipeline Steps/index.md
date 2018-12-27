@@ -235,4 +235,4 @@ The final output is:
 The logic of the aggregation is straightforward and clear. The syntax requires a lot of using-to after SQL. The rules on what should be a variable, an expression, or just a simple object in each statement are confusing at first. But once your first aggregation has been put together and working - the following are largely copy-and-paste.
 
 
-Before we move to Mutations, let's take a look at a simple GraphQL query with no paging, to relax a bit after the aggregations brain dump
+Let's take a look at a simple GraphQL query with no paging - to relax a bit after the aggregations brain dump

@@ -28,9 +28,9 @@ Load the `QUERY VARIABLES` section of your GraphiQL browser window with this con
 }
 ```
 
-Note that if you already have `user_data_input` variable in your GraphiQL, add a comma after its JSON block and remove the closing and opening curly bracket in between the `user_data_input` and `order_data_input` - to set up your Query Variables section as a single JSON with two objects in it.
+Note that if you already have `user_data_input` variable in your GraphiQL, add a comma after its JSON block and remove the closing and opening curly bracket in between the `user_data_input` and `order_data_input` - to have your Query Variables section look as a single JSON object with two variables in it.
 
-The mutation code in GraphiQL will be as follows:
+The mutation code in GraphiQL is as follows (copy it from `doc/graphql-grahiql-samples.md` as well):
 
 ```
 mutation sendOrder($order_data_input: CreateOrderInput!) {
@@ -47,13 +47,14 @@ mutation sendOrder($order_data_input: CreateOrderInput!) {
 }
 ```
 
-As there are no validation on the User Order content in the demo, this mutation can be run multiple times, and new identical Documents will be added.
+In the demo project, no duplicate validation is coded on the User Order content, so this mutation can be run multiple times with the same data - new identical Documents will be created.
+
 
 ## Mutation Schema
 
-The `src/relay-mutations/order/create-order-mutation.js` contains Input Object definition. 
+The `src/relay-mutations/order/create-order-mutation.js` contains the Input Object definition. 
 
-The `mutateAndGetPayload` code reorganizes the input to convert Global IDs into those used in the database:
+`mutateAndGetPayload` reorganizes the input and converts Global IDs into those used in the database:
 
 ```
   mutateAndGetPayload: (inputFields, viewer, info) => {
@@ -74,7 +75,7 @@ The `mutateAndGetPayload` code reorganizes the input to convert Global IDs into 
   }
 ```
 
-Notice, how `orderObj` is declared as a `const` and initialized with 2 parameters: `order_date` and an empty `order_items` array. Then 2 more parameters are added to it using the *dot* notation: `orderObj.user_id` and `orderObj.payer_id`. The Items array is populated in the *for* loop over the corresponding input data.
+Notice, how `orderObj` is declared as a `const` and initialized with 2 parameters: `order_date` and an empty `order_items` array. Then two more parameters are added to it using the *dot* notation: `orderObj.user_id` and `orderObj.payer_id`. The Items array is populated in the `for` loop over the corresponding input data.
 
 
 ## Mutate-and-Get Function and The Database Processor
@@ -84,10 +85,33 @@ Notice, how `orderObj` is declared as a `const` and initialized with 2 parameter
 - converts the `item_details` strings into JS objects via `JSON.parse()`. The conversion is placed into `try/catch` as this would generally be a place where problems with the inbound data format may break the application. In the demo code, the process exits on the first error. A common production-quality system would scan all records and report errors for the entire set at the end, if any
 - calls `OrderCud.createOrder`
  
-Database function `createOrder` is in `src/db-handlers/order/order-cud.js`:
+Database function `createOrder` is in `src/db-handlers/order/order-cud.js`. 
 
-- generates Order ID via `id_gen()`, validates that the ID has not been used already - by querying the database. Those devs used to transaction processing would wonder how can we guarantee that the ID would not be added by another parallel Order flow in the moments between we check for it and use it for creating our Document? We can't. Back to the discussion on what `id_gen()` does, though, the likelihood of this happening is statistically *zero*
-- calls `create` method on the `UserOrder` model
+
+## Order ID Validation Loop and MongoDB Error Checking
+
+Similarly to `createUser`, the Order ID is generated via `id_gen()`. However, in this flow we don't validate the uniqueness of the ID by querying the database. Instead, the `while` loop is coded wrapping the `create` method execution on the `UserOrder` model. If the ID is not unique, the `create` will error out with a message like this:
+
+```
+MongoError: E11000 duplicate key error collection: web_dev.user_order index: _id_ dup key: { : "1UtNnZBYUHDx" }
+```
+
+`mongoose` documentation recommends using this check when trapping unique index violation errors:
+
+```
+err.message.indexOf('duplicate key error') !== -1
+```
+
+Sounds great. If the documentation suggests this as the *official* approach, vs., e.g., somehow extracting the error code, etc. - we're using it. The only problem, if we have multiple unique indexes in the Collection we need to make sure the problem is with the `_id` field - that we can fix by re-generating - vs. with another field that we should report back to the client as a hard stop error. 
+
+As MongoDB reports the troubled `key` back - we can compare it with the `_id`, so the final error trapping condition is 
+
+```
+  if (
+        err.message.indexOf(order_id) !== -1 &&
+        err.message.indexOf('duplicate key error') !== -1
+      )
+``` 
 
 
 Literally, that's all to do in there. We are done. Congratulations!
