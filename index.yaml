@@ -1,14 +1,15 @@
 # This is the *unique* ID of your course
 url_name: mgo_gql_node_asap
-display_name: A$AP Developing NodeJS GraphQL Server with MongoDB 🚀
+display_name: A$AP GraphQL Server with NodeJS and MongoDB 🚀
 org: EXLskills
 # This is the *unique* ID of your course (again) because we're maintaining compatability with other course formats. If you intend to use this with OLX or another course host, then it can have another value.
-weight: 11000
+weight: 
 course: mgo_gql_node_asap
 course_image: https://s3-us-west-2.amazonaws.com/exlskills-course-logos/mgo-gql-node-logos.png
 language: en
 est_minutes: 45
 primary_topic: GraphQL
+skill_level: 2
 repo_url: https://github.com/exlskills/course-ASAP-backend-dev-node-gql-mongo
 topics:
   - GraphQL

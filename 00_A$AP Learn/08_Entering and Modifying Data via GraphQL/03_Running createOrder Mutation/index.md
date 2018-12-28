@@ -114,4 +114,4 @@ As MongoDB reports the troubled `key` back - we can compare it with the `_id`, s
 ``` 
 
 
-This completes the development tasks. The very last step is to generate the client-side GraphQL schema extract!
+As the last mutation topic - let's see what happens when we combine several ones together. Who would guess it's totally possible in GraphQL (on the client side)
