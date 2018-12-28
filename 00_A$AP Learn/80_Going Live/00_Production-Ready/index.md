@@ -1,8 +1,8 @@
 ### How These Toys Get Deployed to Production
 
-So, we have the environment running locally and we can see it working from GraphiQL. Everything looks just too simple to be worth a solid production implementation open to thousands of concurrent users actually entering some meaningful orders.
+So, we have the environment running locally and we can prove it's working via GraphiQL. Well, everything looks just too simple to be worth a solid production implementation supporting thousands of concurrent users and their orders.
 
-No joke here: a full-functioning Sales Order Management (SOM) system needs a lot more queries and mutations than those in the demo project. But they are going to be very similar to what you have running. Just more of the same, and more *business logic*. Do *not* write business logic in JS. Use Type Script.
+No joke here: a full-functioning Sales Order Management (SOM) system needs a lot more queries and mutations than those coded in the demo project. But they are going to be very similar to what you already have running. Just more of the same, and more *business logic*. Do *not* write business logic in JS, though. Use Type Script.
 
 Your knee-jerk reaction is to code *serious* stuff in some monolithic app in Java or C#, deploy a Business Process Management (BPM) solution, build a messaging queue to *orchestrate* flows. Without trivializing what a busy IT team has to deal with - think small and *serverless*. Think how to *remove* systems and components vs. what else to *add* to the portfolio.
 
@@ -16,7 +16,7 @@ Use a reliable service.
 
 ## GraphQL Server
 
-Use a container orchestration service.
+Use a reliable, reasonably priced container orchestration service.
 
 
-The actual deployment steps worth another course. Not that they require knowledge that an average developer doesn't already have or can't quickly gain. But that *is* another course. So, here we'll just answer the questions to help settling the backend development foundation - read on!
+The actual deployment steps worth going through another course. Not that they require knowledge that an average developer doesn't already have or can't quickly gain. But that *is* another course. So, here we'll just cover a few quick points to help settling the backend development foundation - read on!

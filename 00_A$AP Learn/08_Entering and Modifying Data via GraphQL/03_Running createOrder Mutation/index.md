@@ -114,4 +114,4 @@ As MongoDB reports the troubled `key` back - we can compare it with the `_id`, s
 ``` 
 
 
-Literally, that's all to do in there. We are done. Congratulations!
+This completes the development tasks. The very last step is to generate the client-side GraphQL schema extract!
