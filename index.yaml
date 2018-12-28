@@ -1,0 +1,28 @@
+# This is the *unique* ID of your course
+url_name: mgo_gql_node_asap
+display_name: A$AP Developing NodeJS GraphQL Server with MongoDB 🚀
+org: EXLskills
+# This is the *unique* ID of your course (again) because we're maintaining compatability with other course formats. If you intend to use this with OLX or another course host, then it can have another value.
+weight: 11000
+course: mgo_gql_node_asap
+course_image: https://s3-us-west-2.amazonaws.com/exlskills-course-logos/mgo-gql-node-logos.png
+language: en
+est_minutes: 45
+primary_topic: GraphQL
+repo_url: https://github.com/exlskills/course-ASAP-backend-dev-node-gql-mongo
+topics:
+  - GraphQL
+  - NodeJS
+  - MongoDB
+  - Docker
+  - A$AP Learn
+headline: Learn GraphQL Server Dev in NodeJS with MongoDB A$AP and Get to Work!
+description: |2
+  This is the EXLskills free and open-source A$AP Learn GoLang Course! It's a highly-accelerated open course that's best-suited for people with a bit of background in software engineering to quickly pick up Go, learn the essential best practices, and hit the ground running!
+  After this course, you'll be able to build basic Go applications in addition to lightweight webservers, highly-concurrent programs, and reusable libraries in Go that you can share with other developers!
+  For further practice, we recommend checking out our Go [Guided Projects](https://exlskills.com/learn-en/projects) that will give you access to a professional Go developer, detailed documentation, and real-world tasks that you can work on to go from the basics of Go, into building production apps.
+info_md: |2
+  This is your course's long-form markdown info text. This will be shown to users in the info tab of your course.
+  The '2' above is to tell the YAML parser that everything that's indented by at least two characters below is part of this multi-line text.
+  To 'break out' of this info markdown, just add a property without indentation and you'll be dropped back into the primary YAML
+  
