@@ -30,7 +30,7 @@ If `then` was not so clear for you, Promises may just turn you completely off fr
 
 Shaking off the convoluted naming conventions and long theoretical explanations, you do understand that in software there are functions that *return* something that becomes actually available only when the long-running procedure inside the function completes, and it is not known what exactly the return will be till then. In an asynchronous system, the surrounding code may be doing something else while the function is still running. What's the best way to write code then that would behave differently depending on that other (asynchronous) function's state? The common agreement is to treat the return of the asynchronous function as *Future* - not immediately known at a particular moment, but eventually. Java 8 uses exactly `Future` (java.util.concurrent.Future), whereas JS uses the term `Promise` - that's all it is.
 
-To further clear up the JS Promise terminology, at any given time during the runtime execution, the async function's return value (the Promise) can be:
+To further clear up the JS Promise terminology, at any given moment during the runtime execution, the async function's return value (the Promise) can be:
 
 - *pending* - the async function is still running
 - *fulfilled* - the async function completed normally, however the developer defined the normal completion condition in the code, e.g., the database query result came in
@@ -43,6 +43,5 @@ The critical importance of *rejecting the Promise* is on the error handling side
 Once you get comfortable enough with JS, reading and understanding code with Promises won't be an issue.
 
 So, if someone tells you that JS is not a production-strength language and it is hard to learn for a classically trained dev - they are likely way behind the curve on what the modern JS is these days.
-
-
+<br>
 Read on, and you'll begin coding professional JS backend software in a matter of hours!

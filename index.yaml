@@ -1,13 +1,13 @@
 # This is the *unique* ID of your course
-url_name: mgo_gql_node_asap
+url_name: gql_node_mgo_asap
 display_name: A$AP GraphQL Server with NodeJS and MongoDB 🚀
 org: EXLskills
 # This is the *unique* ID of your course (again) because we're maintaining compatability with other course formats. If you intend to use this with OLX or another course host, then it can have another value.
 weight: 
-course: mgo_gql_node_asap
+course: gql_node_mgo_asap
 course_image: https://s3-us-west-2.amazonaws.com/exlskills-course-logos/mgo-gql-node-logos.png
 language: en
-est_minutes: 45
+est_minutes: 1200
 primary_topic: GraphQL
 skill_level: 2
 repo_url: https://github.com/exlskills/course-ASAP-backend-dev-node-gql-mongo
@@ -17,11 +17,11 @@ topics:
   - MongoDB
   - Docker
   - A$AP Learn
-headline: Learn GraphQL Server Dev in NodeJS with MongoDB A$AP and Get to Work!
+headline: Build GraphQL Server with NodeJS and MongoDB A$AP and Get to Work!
 description: |2
-  This is the EXLskills free and open-source A$AP Learn GoLang Course! It's a highly-accelerated open course that's best-suited for people with a bit of background in software engineering to quickly pick up Go, learn the essential best practices, and hit the ground running!
-  After this course, you'll be able to build basic Go applications in addition to lightweight webservers, highly-concurrent programs, and reusable libraries in Go that you can share with other developers!
-  For further practice, we recommend checking out our Go [Guided Projects](https://exlskills.com/learn-en/projects) that will give you access to a professional Go developer, detailed documentation, and real-world tasks that you can work on to go from the basics of Go, into building production apps.
+  This is the EXLskills free and open-source GraphQL Server with NodeJS and MongoDB A$AP Course! It's a highly-accelerated open course that's best-suited for people with IT developer background in "legacy" technologies to quickly get up to speed with the content of the modern IT Dev Tool Chest, learn a concrete marketable hot skill and hit the ground running again!
+  After this course, you'll be able to apply modern development practices to building and deploying sophisticated backend software on popular platforms with huge demand for skilled resources! Convert your "legacy" experience into a hot modern skill A$AP. Get comfortable with Docker, container orchestration, Git and dive into JavaScript code implementing GraphQL server in NodeJS over MongoDB. On your laptop and in the Cloud. 
+  For further practice, we recommend checking out our [Guided Projects](https://exlskills.com/learn-en/projects) that will give you access to a professional developer, detailed documentation, and real-world tasks that you can work on to go from the basics into building production apps.
 info_md: |2
   This is your course's long-form markdown info text. This will be shown to users in the info tab of your course.
   The '2' above is to tell the YAML parser that everything that's indented by at least two characters below is part of this multi-line text.
