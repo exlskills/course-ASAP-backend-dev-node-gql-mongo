@@ -18,7 +18,6 @@ GraphQL has a lot of theory behind it, but there are just a few simple practical
 - GraphQL framework controls when and how the processing functions are called, but it doesn't provide any ready to use code for handling a particular flow or datasource. So, the functions must be coded by the server-side developer. Controversially, there are 3rd party packages that can be used to bridge GraphQL and, e.g., MongoDB directly - we'll see that a typical query/mutation execution function for GraphQL with MongoDB is pretty trivial to code. In a real implementation, though, there may still be enough custom logic to cover by writing code vs. configuring in a generic external package, so we don't review any of those in the demo project
 - the framework takes a complete care of formatting HTTPS request-response. Normally, the developer would never even see the raw HTTP the framework produces
 
-
 ### GraphQL Backend Development Tasks
 
 Now that we know the basics of GraphQL, here is the list of tasks that the developer building a GraphQL backend in NodeJS will be working on (given the business requirements):
@@ -29,7 +28,6 @@ Now that we know the basics of GraphQL, here is the list of tasks that the devel
 - write GraphQL definitions for the queries and mutations in scope, specifying the data going and out, as well as setting up placeholders for the JS implementation functions
 - write the JS implementation functions for each query and mutation - from the request, via the database layer, to the response
 - run NodeJS with debug-level logging and test the solution launching queries and mutations via the `GraphiQL` browser-based interactive tool 
-
  
 ### Just like MVC and REST - And More
 
@@ -49,5 +47,10 @@ We'll review this in great details going forward, but the key takeaway at this p
 
 With a little extra work and smart design - no more uncontrolled REST-like data dumps flooding the wires and clients.
 
+### Client-side GraphQL
 
+In this course, we are building a GraphQL server. There are client-side GraphQL components that are not in scope of this course, as well as some difference in terminology that we'll see towards the end of the course.
+
+You know, there is always more to learn out there. "The more you know, the more you know you don't know". So, let's keep the focus, and once you cover the server-side, you'll decide where to go next. Maybe, you'll end up learning more about the client-side GraphQL - maybe not.
+<br>
 So, GraphQL is simple, but let's continue detailing it so the foundation is well understood. Next, we'll take a look at the actual schema components as those are coded in the demo project

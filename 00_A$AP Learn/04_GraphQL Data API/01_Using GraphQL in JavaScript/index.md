@@ -9,9 +9,8 @@ There are two mainstream implementations of GraphQL on top of the base `graphql`
 - [relay](https://www.npmjs.com/package/graphql-relay) maintained by Facebook
 - [apollo](https://www.npmjs.com/package/apollo-server) maintained by Apollo
 
-As with many technologies, different vendors and dev teams build up features on top of the common standard foundation, so the above implementations are compatible when using core GraphQL but differ when it gets to some specific Use Cases. Comparing the two is out of scope of this corse. Once you get the basics, fulfilling details will be easy.
+As with many technologies, different vendors and development teams build up features on top of the common standard foundation, so the above implementations are compatible when using core GraphQL but differ when it gets to some specific Use Cases. Comparing the two is out of scope of this corse. Once you get the basics, fulfilling details will be easy.
 
 The demo project implements a GraphQL backend built with *relay-compatible* features required by the [Relay JS Framework](https://facebook.github.io/relay/). On the Front End side, Relay framework brings powerful functionality that smooths the user experience over slow connections by caching data and managing requests. Respectively, on the server side, Relay requires adherence to its naming convention and coverage of functionality that aids the Front End. 
-
-
-A seasoned dev knows that tool selection is a tough process. So, brushing aside numerous posts and marketing pages, let's get into the code!
+<br>
+A seasoned developer knows that tool selection is a tough process. So, brushing aside numerous posts and marketing pages, let's get into the code!

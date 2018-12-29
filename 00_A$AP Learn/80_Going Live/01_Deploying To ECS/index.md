@@ -30,6 +30,5 @@ At a fraction of cost and less complexity than a full-scale Kubernetes service, 
 One thing to realize is that depending on the overall design of your application portfolio you may *never* need to *sophisticate up* to full-scale Kubernetes. If you keep the container-based set of applications clean and simple - you don't need all the bells and whistles that help running containerized stack as if it was a bunch of old-style VMs or server clusters. Simplify the base app design and utilize serverless, and you may soon not recognize your portfolio - in a good way.
 
 Whatever you do - do not try installing anything or running yourself. Leave the platform stuff to the professionals to handle. Focus your effort on deciphering their services documentation and offerings: not so easy.
-
-
+<br>
 Last thing to cover before we run Production - automated testing. Let's see what that is about

@@ -1,4 +1,4 @@
-### GraphQL Query Schema
+### GraphQL Query Schema Component
 
 Let's look at `src/relay-queries/user/user-order-list-query.js`
 
@@ -62,5 +62,5 @@ Here's what we've got:
 
   Once you put `{}` into the arrow function - it becomes a multi-line function that must use an explicit `return` statement. Sometimes it feels like JS shoots itself in the foot allowing all these different variations of the syntax, seemingly, just to save a few characters in the code. Yes, but less characters equate to faster code load into the browser. Whatever the reason is - JS syntax is what we have to live with in this line of work.
 
-
+<br>
 Lastly, let's take a quick look at how mutations are defined in the GraphQL schema, before jumping into the code and running real flows. Very close!

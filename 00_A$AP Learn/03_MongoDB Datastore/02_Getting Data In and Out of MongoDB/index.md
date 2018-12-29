@@ -8,7 +8,6 @@ Each CRUD operation is run against a specific Collection. Other Collections can 
 
 MongoDB JS API and the proprietary package `mongoose` used in the demo project utilize CRUD syntax and command structure nearly identical to those detailed in the MongoDB documentation. 
 
-
 ### Transactions 
 
 According to the MongoDB documentation, latest versions provide *better* transaction support than initially supplied with the engine. 
@@ -16,7 +15,6 @@ According to the MongoDB documentation, latest versions provide *better* transac
 As a rule of thumb, the developer should assume that an individual Document is always inserted or updated as a whole (*atomically*). However, as it gets to updating multiple Documents in one or several Collections - the behavior would greatly depend on the DB version and the type of the operation used. As pointed out earlier, MongoDB is best used in business applications that do *not* require transaction-heavy scenarios. 
 
 It is not uncommon using multiple databases in a single application that handle various functionality, e.g., an RDBMS may be employed to handle Product Stock multi-steps commitments and issues, MongoDB - manage supporting documents, and Elasticsearch - enable open-text Product Catalog discovery. Those separate databases would be loosely integrated via near real-time, unblocking replication systems. Only one database would act as the system of record for each particular data category: the Inventory would be in the RDBMS, Product Categories - in MongoDB. Product features and descriptions - in MongoDB as the system of record and also in the Elasticsearch to run text queries against.
-
 
 ### Query Functionality - Find and Aggregations
 
@@ -32,6 +30,5 @@ Somewhat unfortunate, *filtering* syntax inside aggregation steps does not alway
 - *joining* Collections via the *$lookup* command 
 
 Aggregations may look quite confusing and hard to debug at first. The good news is that in development and testing, the pipeline can be "stopped" to see the intermediate result - by literally commenting out its remaining tail. So, aggregations *are* difficult to code, especially the first few ones, but do assume that you will *have* to use them working with MongoDB in a professional backend developer capacity.
-
-
+<br>
 Will see some interesting examples on using Aggregations in the demo project code. Next - a quick overview of `mongoose`

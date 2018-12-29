@@ -36,8 +36,7 @@ mutation sendUser($user_data_input: CreateUserInput!) {
 
 Notice `$user_data_input` in two places in the mutation code - matching the name defined in the Query Variables section. In GraphiQL, variables can be used in queries as well - rather than writing long conditions directly inside `()`. For mutations, as we have to explicitly provide the input type (`CreateUserInput!`) - use of variables is the common practice. The `!` at the end of the Input Type's name reflects everyone's excitement about this technology. 
 
-
-## Running the Mutation
+### Running the Mutation
 
 As this is going to *mutate* the data in our MongoDB, we need to be prepared to *un-mutate* if we want to test certain transactions again. Conveniently, MongoDB Compass has a quick *delete* option at the Document level in the Collections GUI, so have Compass running.
 
@@ -61,6 +60,5 @@ The execution on the GraphiQL side is the same as when running queries - the run
 ```
 
 In Compass, you can see a new User Document added with the ID returned by the mutation process.
-
-
+<br>
 Next, let's review the code that carries out the flow

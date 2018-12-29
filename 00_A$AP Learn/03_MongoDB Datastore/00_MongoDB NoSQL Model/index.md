@@ -1,6 +1,6 @@
 ### MongoDB NoSQL Model 
 
-Any professional developer knows what a Host, Database, Table, Record, Column, Field, Cell, Index are. Those who spent their careers working with Relational databases will find MongoDB very familiar and recognizable, in spite of its *NoSql* label. 
+Any professional developer knows what a Host, Database, Table, Record, Column, Field, Cell, Index are. Those who spent their careers working with Relational databases will find MongoDB very familiar and recognizable, in spite of its *NoSql* designation. 
 
 MongoDB has Hosts and Databases. For Tables, MongoDB uses *Collections*, which are objects to store multiple Records, called *Documents* in MongoDB. So, MongoDB is a database that manages storage and retrieval of Documents. Documents have *Fields* with *Values*. MongoDB also has *Indexes* (or `indices` if you prefer). Check, check, check - everything is covered.
 
@@ -91,6 +91,5 @@ Not too difficult.
 What does this mean for the developer? Design your data model in such a way that most frequently needed information can be extracted in a single query, without having the engine digging inside embedded objects for it. Back to the example above, naturally, if you have just a few Item lines per Order, storing everything in a single Document makes sense. Especially, if your business model is focused on the Order level processing. However, if your business model is Item-focused and your Orders contain many Items - you should consider storing each Order Item Line as a Document in a separate OrderItem Collection. In the latter case, you may decide to copy some Order information that doesn't change into each OrderItem collection Document and/or use the `lookup` functionality to link your OrderItem and Order Collections when retrieving data from both together. Sounds like a Relational design? Yes. Don't think of NoSQL as "no relations". NoSQL is about breaking the artificial limitations of the Relational model to expand usability, but keeping the smartness of it separating data into manageable and easily navigatable related sets.
 
 And of course, the ultimate goal is, as always in the App-Database design, to minimize the amount of data traveling from the DB into the App. No filtering in the App - always reduce in the database.
-
-
+<br>
 So, we got the high-level of MongoDB, next, let's look a little deeper at Schema design and implementation specifics

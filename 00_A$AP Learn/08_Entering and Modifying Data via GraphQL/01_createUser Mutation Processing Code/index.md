@@ -54,6 +54,5 @@ The `match` properties are conveniently passed directly into the `basicFind` fun
 If the validation passes, `UserCud.createUser` is called to *create* the User Document in MongoDB.
 
 The return values are the User ID if the Document gets created and the uniform `completionObj` that details the outcome of the process. The ID is sent back converted to the Global ID - keeping the design concept that all IDs passing via GraphQL should be in that special format.
-
-
+<br>
 Next, we'll look at the MongoDB operation that creates the Document in the User Collection

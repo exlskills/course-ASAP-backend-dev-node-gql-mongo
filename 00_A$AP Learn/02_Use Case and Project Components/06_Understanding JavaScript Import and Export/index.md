@@ -42,7 +42,7 @@ actually comes from `src/config/index.js`.
 
 Only explicitly *exported* code components can be *imported* into other code files. 
 
-Export and import rules and syntax have evolved from early versions of JS. In this course we're committed to using modern JS, so we avoid the old style `require` in favor of `import` - anything that makes JS code look as other professional languages developers are familiar with. 
+Export and import rules and syntax have evolved from early versions of JS. In this course we're committed to using modern JS, so we avoid the old style `require` in favor of `import` - anything that makes JS code look like other professional languages developers are familiar with. 
 
 As the ultimate use of imports is to bring in *exported* code, the key to understanding what is *imported* is actually on the *export* side. Let's look at `src/data-seed/user-seed.js`:
 
@@ -108,7 +108,7 @@ import { GraphQLFloat, GraphQLObjectType } from 'graphql';
 
 The downside of the above - extra typing. The IDE may help auto-generating imports and it will validate object names, but often times it's the developer's job to type the names in. 
 
-Missing imports break your code execution. Extra imports slow down the program load. For the backend dev, it looks like the program load speed is a minor consideration, compare to the front end scenario where all imports must get physically loaded into the browser client over the Internet and compiled before the app code flow really starts.
+Missing imports break your code execution. Extra imports slow down the program load. For the backend developer, it looks like the program load speed is a minor consideration, compare to the front end scenario where all imports must get physically loaded into the browser client over the Internet and compiled/evaluated before the app code flow really starts.
 
 The demo provides examples of `import` and `export` usage that come from various sources - this would be the case in many production JS projects, though. E.g., 
 
@@ -122,12 +122,10 @@ The demo provides examples of `import` and `export` usage that come from various
 
 JS syntax and styling considerations evolve, just pick something you feel comfortable with - you can always change it working on your next project (and you very likely will). And then change again.
 
-
-## Is Imported Code Auto-executed?
+### Is Imported Code Auto-executed?
 
 If you know a little Python, you've seen how *imported* code is actually *auto-executed* in there. Not in many other languages. Not in JS.
 
 However, you may see wierd things happening in JS when some code appears to be kicked off by virtue of *importing* something from the file the code is located in. This is done by the *Evaluation* process. The topic is gray enough to keep away from, and the impact of Evaluation on backend JS code is not something you see widely discussed. JS is an *interpreted* language. NodeJS evaluates modules before running them, and when modules are evaluated, *loose* code gets executed. E.g., if you put some bare logging statements in JS code files, outside exported blocks, you'll see those statements printed on startup. So, don't put any random loose code into the JS file. Keep the files neat with import statements and export blocks. 
- 
-
+<br>
 After the `import`/`export` warmup, next, we'll review the demo project JS code components

@@ -1,4 +1,4 @@
-### Skill Set Prerequisites for This Course
+### Knowledge Prerequisites for This Course
 
 This course is for an IT professional who spent some time working with general backend technologies. It is assumed that the learner has a grasp of the following:
 

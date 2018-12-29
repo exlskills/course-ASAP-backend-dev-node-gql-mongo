@@ -67,6 +67,5 @@ Hit the "Execute Query" run-like looking button in the top bar, next to the Grap
 ```
 
 In the `node-dev` shell, you can see some debug-level log statements printed. It is definitely cooking.
-
-
+<br>
 Everything looks pretty simple and logical. Now, let's review the exact syntax and flow to ensure there is no mystery left in what is done and how.

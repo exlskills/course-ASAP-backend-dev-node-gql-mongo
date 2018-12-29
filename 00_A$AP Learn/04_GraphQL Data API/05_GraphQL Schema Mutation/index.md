@@ -1,4 +1,4 @@
-### GraphQL Mutation Schema
+### GraphQL Mutation Schema Component
 
 Check out `src/relay-mutations/order/create-order-mutation.js`
 
@@ -46,6 +46,5 @@ Inside the function in `mutateAndGetPayload`, Relay Global IDs are converted int
 Mutation input is usually wrapped as *Input Types*. `OrderInputType` is defined in the same JS file, above the mutation definition. Somewhat similar to Object Types that map resolver output to the data sent to the client, Input Types act as an extra mapping layer to perform necessary conversions on the incoming client data before it is passed into `mutateAndGetPayload`. 
 
 `outputFields` are similar to the Object Type in queries - they are loaded from the object returned by `mutateAndGetPayload`. In this case, we assuring that `createOrder` returns an object matching the structure defined in `outputFields`.
-
-
+<br>
 Enough with the overview, let's move on to setting up and running the demo project's code next!

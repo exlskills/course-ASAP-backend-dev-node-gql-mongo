@@ -1,10 +1,10 @@
 ### package.json and package-lock.json
 
-Just to make sure, you probably realize that in JS the concept of *package* is used for a for an entire business or utility application vs. a *folder* in a Java application. Subsequently, the plentiful JS 3rd party utilities are called *packages* - they are *packaged* to be used elsewhere.
+Just to make sure, you probably realize that in JS, the concept of *package* relates to an entire business or utility application vs. a *folder* as in a Java application. Subsequently, the plentiful JS 3rd party utilities are called *packages* - they are *packaged* to be used elsewhere.
 
-Likewise, a NodeJS project must be packaged for the NodeJS software to run it. Getting the project to a runnable state usually takes a few steps in the project's *lifecycle*. The place where all project information and configuration is stored is `package.json`. This file is the heart of the NodeJS project configuration. It is written to [NodeJS Package Manager standard](https://docs.npmjs.com/creating-a-package-json-file). Sure enough, the file is also usually copied from somewhere initially and then updated, although you may see `npm init` mentioned as the method of creating `package.json` from scratch - corresponding to the project initiation step in its lifecycle.
+Likewise, a NodeJS project must be *packaged* for the NodeJS software to run it. Getting the project to a runnable state usually takes a few steps in the project's *lifecycle*. `package.json` is the place where all project information and configuration is stored in. This file is the heart of the NodeJS project. It is written to [NodeJS Package Manager standard](https://docs.npmjs.com/creating-a-package-json-file). Sure enough, the file is also usually copied from somewhere initially and then updated, although, you may see `npm init` mentioned as the method of creating `package.json` from scratch - corresponding to the project initiation step in its lifecycle.
 
-`package-lock.json` is a control file that is auto-generated or updated when the Package Manager `npm` runs the project installation step and brings in all required 3rd party ("external") packages locally, as listed in the `dependencies` and `devDependencies` sections of `package.json`. Just like with `Maven` in Java or `pip` in Python, proper dependencies management is absolutely crucial for the wellbeing of your project. 
+`package-lock.json` is a control file that is auto-generated (or updated) when the Package Manager `npm` runs the project installation step and brings in all required 3rd party ("external") packages locally, as listed in the `dependencies` and `devDependencies` sections of `package.json`. Just like with `Maven` in Java or `pip` in Python, proper dependencies management is absolutely crucial for the wellbeing of your project. 
 
 Stable release versions of external packages are usually three dot-separated numbers, e.g., `8.1.12`. The dependency list specifies the version to be loaded by the Package Manager into `node_modules/` and used at runtime. As the external packages have their own dependencies, the Package Manager applies some logic to ensure that the entire required dependency tree is brought in. Reusable common dependencies and everything listed in your `package.json` is placed into individual sub-folders under `node_modules`. If an external package requires a version of some package different from the one listed in `package.json`, that version will be loaded into its own `node_modules` sub-folder under the external package's sub-folder.
 
@@ -12,7 +12,7 @@ Stable release versions of external packages are usually three dot-separated num
 
 In the most common scenario, when adding an external package to your dependencies list, the version is set to the 3-pos latest available stable one and a caret `^` is placed in front it. This guarantees that the package will be brought in at that or later version, but still within the same Major - no auto jump to later Majors. 
 
-The latest available package version can be found by going to the package's npm site or suggested by the IDE when editing `package.json` (must be connected to the npm system over the internet, of course). `npm install <pakage name>` described below adds the package to the list automatically.
+The latest available package version can be found by going to the package's npm site or suggested by the IDE when editing `package.json` (must be connected to the npm system over the internet, of course). `npm install <package name>` described below adds the package to the list automatically.
 
 Once the logic is evaluated and applied by the Package Manager, the resulted combination of packages with versions is written into the *lock* file `package-lock.json` (or `yarn-lock.json` if using `yarn` vs. `npm`). The presence of the lock file guarantees that the Package Manager will load the exact same dependency tree as described in it, therefore creating repeatable installations with matching content of `node_modules/`.
 
@@ -28,12 +28,10 @@ Packages listed in the `devDependencies` section are only required for the dev e
 
 We will review the content of `package.json` used in this course in details when we look at the individual JS code components and processes
 
-
 ### Adding New Packages Via the Command Line 
 
 In any npm package documentation, you'll see `npm install <package>` as the way to use it. This is a convenient way adding a new package to you project: the package will be installed at the latest stable version and added in the alphabetically sorted location in `package.json` dependencies, with the `^` prefix in front of the version. To add new packages to `devDependencies`, use `npm install <package> --save-dev`
 
 Everything you do via `npm`, by default affects the current directory only. However, a "global" install of packages is also available. It is a common recommendation *not* to install packages globally for various reasons. When developing in a dockerized environment - a global install is not even an option, as the container running NodeJS would only see project's local `node_modules` folder.
-
-
+<br>
 Next, we'll review the `scripts` section of `package.json`

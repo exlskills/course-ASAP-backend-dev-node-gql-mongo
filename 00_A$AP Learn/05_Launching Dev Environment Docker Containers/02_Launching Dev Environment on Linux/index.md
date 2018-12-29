@@ -2,8 +2,7 @@
 
 **Please read the Launching on Windows section if your desktop OS is not Linux**
 
-
-## MongoDB
+### MongoDB
 
 Make sure that port 27017 on your dev box is not already used by another local instance of MongoDB. You can change the left-side (host side) port number in the `docker run` command below to use a different port instead. If the port you are trying to use is already engaged - you'll get an error message when launching the container. If you do, remove the container (`docker rm mongo`), troubleshoot the port problem and launch the container again.
 
@@ -48,8 +47,7 @@ On failures or when you want to clear everything out, `docker stop mongo` and `d
 
 The shared volume will be automatically reused when you relaunch the `docker run` command for the container. The data on the volume is supposed to be preserved when you stop or remove the container. You can remove the volume via `docker volume rm mongodata` if you want to start fresh or wrap up.
 
-
-## NodeJS
+### NodeJS
 
 Let's assume you cloned the demo project repository into `~/docker-vol/demo-gql-mongo` on your dev box. Then your container launch command should be as follows:
 
@@ -86,8 +84,5 @@ Along the same lines, we build our own image from `node:8`, we can set `/myapp` 
 `exit` ends your terminal bash session and puts you back into the host's shell.
 
 What is `-it` in the `docker exec` (may also be seen in `docker run`)? One answer can be that `-it` means that we're using the IT Professional mode. In practical terms, `-it` is the opposite of the `-d` *daemon* mode of the container: you get both `-i` input open and `-t` for *tty*, so you can use the container's terminal. You can either launch a container in the `-it` mode and start `bash` form the get go, or you can `exec` `bash` in the `-it` mode on a container launched in the `-d` mode. Note that some Unix containers are built from images that do not have `bash` enabled, so you'd need to try other shells.
-
-
+<br>
 Now that we have the dev containers running, we are finally ready for the action!
-
-

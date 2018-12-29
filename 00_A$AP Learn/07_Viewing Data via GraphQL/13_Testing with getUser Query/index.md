@@ -44,13 +44,11 @@ So, the `mongoose` query result is a *special* object. We hardly ever encounter 
 
 On rare occasions, however, 3rd party packages may fail processing `mongoose` objects as data. In those cases, use `toObject()`. Just something to keep in the back of your mind when working with `mongoose`. Generally, `mongoose` is helping structuring the application, so, we're keeping it around in the demo project. 
 
-
-## Use lean() Before exec()
+### Use lean() Before exec()
 
 Adding `lean()` before `exec()` in `mongoose` queries turns off the `mongoose` special object functionality. As you probably guessed, the functionality drives `mongoose`-specific model and schema-related stuff such as defaulting and validation. So, without getting into details, if all you need is to *extract* data vs. *retrieve, analyze and update* - `mongoose` objects are useless and can be turned off via `lean()`. 
 
 It is *recommended* using `lean()` on queries that return many Documents to help performance by bypassing `mongoose` object wrapper logic that it applies to each retrieved Document. If you run into performance issues and exhausted optimization on the database side - use `lean()` on large volume queries. Although, you would likely benefit from the mentioned earlier *batching*. So, all things considered, `lean()` may not yield you much on the large schema of things. If your queries return lots of records from the database to the logic server (the one that uses `mongoose`) - you may have a serious design problem in the overall application.
-
-
+<br>
 This completes our GraphQL Data Serving chapter! Let's get on to *mutations* - there won't be much new stuff, an easy topic to learn after all the knowledge you've already gained to this point
 

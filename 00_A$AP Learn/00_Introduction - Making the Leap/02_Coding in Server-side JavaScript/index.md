@@ -1,4 +1,4 @@
-### How to Code Server-side JavaScript
+### Server-side JavaScript Is Not That Bad As You May Think
 
 Let's get the language foundation straight first.
 
@@ -8,13 +8,13 @@ Luckily, JS progressed a long way since its early days, and a server-side progra
 
 The power of the JS paradigm is in its natively asynchronous and non-blocking nature - as it has been designed to manage loosely coupled processes and components. As common business systems consist of loosely coupled processes and components - JS is a perfect fit for business apps development. Except when the use case requires tight control and transaction processing. 
 
-A browser-friendly feature of JS is its crash avoidance: the code keeps on running pretty much under any circumstances - with misspelled and misused variables, sometimes even broken syntax. In professional development, broken code that works is an unacceptable disastrous time bomb, a *bug*, basically. The dev process as we know it, with the help of compilers, is a hard work to get rid of bugs. So when the whole philosophy of the language is based on *adopting* to bugs vs. *prompting* to fix them at any cost, as early and systematically as possible - it is a very alarming sign for a professional thinking of using the language. Again, there have been progress made on validating JS code via pre-compilers and advanced IDE tools, however, the ultimate path for a professional developer is to adopt TypeScript (TS). For simplicity of learning JS *concepts* this course does not use TS, which is basically just a syntactic and code organization add-on. But the importance of TS is in professional development can't be overestimated.
+A browser-friendly feature of JS is its crash avoidance: the code keeps on running pretty much under any circumstances - with misspelled and misused variables, sometimes even broken syntax. In professional development, broken code that works is an unacceptable disastrous time bomb, a *bug*, basically. The development process as we know it, with the help of compilers, is a hard work to get rid of bugs. So when the whole philosophy of the language is based on *adopting* to bugs vs. *prompting* to fix them at any cost, as early and systematically as possible - it is a very alarming sign for a professional thinking of using the language. Again, there have been progress made on validating JS code via pre-compilers and advanced IDE tools, however, the ultimate path for a professional developer is to adopt TypeScript (TS). For simplicity of learning JS *concepts* this course does not use TS, which is basically just a syntactic and code organization add-on. But the importance of TS is in professional development can't be overestimated.
 
-## Do not callback - Use async and await
+### Do Not callback - Use async and await
 
 Modern JS enables writing well-structured object-oriented or procedural-style code. Single-sentence oriented constructions with `then` and callbacks are things of the past. Those were (and still are by lots of devs) used for operations that require to *wait* for completion of a step before the next step can be executed. The proper way now is to write `async` functions that enable the use of `await` in front of statements that equate to asynchronous operations, e.g, database I/O. The execution flow *"pauses"* till the operation completes, and then (`then` !) proceeds normally to the next line in the program. Isn't that amazing?  
 
-## New Features Slow Adoption
+### New Features Slow Adoption
 
 Not all software "understands" the new features of JS. The browser compatibility as been a notorious problem that the industry is still unable to solve effectively. NodeJS has its own view on which features of JS it should handle and which are "optional". This doesn't seem to be a problem for the development community, though, used to struggles with the browser stuff. Readily available, are *transpilers* or compilers that convert any code to any target level of understanding by the runtime tools. Here come the `babel` step necessary to run the latest style JS code in stable versions of NodeJS
 
@@ -22,7 +22,7 @@ Specifically, NodeJS version 8 does not "understand" `import` statements.
 
 Although annoying, dealing with syntax version is a small tradeoff, historically common to other technologies as well.
 
-## Bonus Reading: Note on JS Promises
+### Bonus Reading: JS Promises
 
 This course teaches you modern JS only as it applies to writing effective backend solutions with the use of the tools in scope, such as `mongoose` and *GraphQL*. The point is that you don't have to be a JS *expert* in order to write *very good* implementations with those tools. However, it is beneficial to understand, at least at a high level, the concept of JS *Promises*, so let's cover it here and now, before getting to more exciting and relevant stuff. 
 
@@ -42,6 +42,6 @@ The critical importance of *rejecting the Promise* is on the error handling side
 
 Once you get comfortable enough with JS, reading and understanding code with Promises won't be an issue.
 
-So, if someone tells you that JS is not a production-strength language and it is hard to learn for a classically trained dev - they are likely way behind the curve on what the modern JS is these days.
+So, if someone tells you that JS is not a production-strength language and it is hard to learn for a classically trained developer - they are likely way behind the curve on what the modern JS is these days.
 <br>
 Read on, and you'll begin coding professional JS backend software in a matter of hours!

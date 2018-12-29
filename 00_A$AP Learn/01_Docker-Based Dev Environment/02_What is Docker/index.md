@@ -4,7 +4,7 @@ Docker is a continually running (daemon) program. It runs on the *host* machine 
 
 From the software developer's point of view, Docker containers are no different than VMs. Both are *virtual* (vs. *bare metal*) and run OS different from that of the host. To a hardware-focused person, though, containers are very different from traditional VMs because VMs use independent *slices* of the available host resources, whereas containers are ultimately *programs* running within the host's OS and *managed* by Docker.
 
-This is the last time we're going to compare containers and VMs. Let's go by the developer's view and think of containers as independent machines with convenient resource sharing options with the host machine. In other words, when you have a laptop with two Docker containers running on it - you've got *three machines* running - great!
+This is the last time we're going to compare containers and VMs. Let's go by the developer's view and think of containers as independent machines, conveniently sharing resources of and with the host machine. In other words, when you have a laptop with two Docker containers running on it - you've got *three machines* running - great!
 
 Containers are usually thought of as *running* (machines). However, they can be *not running* (exited) or *starting/stopping* - similarly to your laptop being in suspended mode or going in/out of it.
 
@@ -17,6 +17,10 @@ Containers are created from images. Docker images are like VM images - they have
 In practical reality, though, containers can be used in any way useful and convenient - run, stopped, restarted. Just keep in mind that the container's file system by itself is *not persisted*, and once the container is "removed" - it is gone. If you do want to keep updates to the file system done by the container - you must explicitly define volumes shared between the container and the host when you start (`run`) the container for the *first* time.
 
 In accordance with the theory, containers must always run some process when they are started. The default process to run is defined in the image, and an override can be put into the `docker run` command. If nothing explicit occupies the container's runtime - the container stops (exists). This is annoying when you just want to start a generic container that runs as a daemon machine waiting for you to access it and try some things out, but there are easy ways to emulate a dummy daemon to keep the container from shutting down.
+
+### No Docker In Docker
+
+Can't use Docker as a Russian Doll. There are hacks, but assume that your Docker *container* cannot have its own internal Docker installed and other containers running in it. That's not the idea how containers should be used, anyway.
 
 ### The Three Docker Commands 
 
@@ -31,6 +35,5 @@ So, `docker build` is a complex process (lots fo room for improvement), but the 
 The commands have a long (hugely long) list of parameters that control host-container coordination: shared volumes, use of networking and ports. Alternatively, `docker-compose` is designed to manage the parameters in a YAML file, for a group of containers vs. one at a time - different flavours of the same tech foundation.
 
 In the demo project, we do not *build* any images, just use standard ones, so there will be no `docker build`. But the other two commands will be used quite a lot.
-
-
+<br>
 Containers are cool, but their real value shines when it gets to *container orchestration* - let's look at that next!

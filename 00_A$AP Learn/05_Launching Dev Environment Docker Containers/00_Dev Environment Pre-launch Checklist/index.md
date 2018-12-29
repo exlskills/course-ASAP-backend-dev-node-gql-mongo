@@ -12,8 +12,7 @@ As a recap, this is what you need to have installed to continue from this point 
 - [ ] VSC
 - [ ] MongoDB Compass
 
-
-## Next, Have The Demo Project Cloned Locally
+### Have The Demo Project Cloned Locally
 
 Till this point, we've been *reviewing* the demo project code, and we could do it perfectly fine browsing directly throw the content of the [EXLskills GitHub repository](https://github.com/exlskills/demo-gql-mongo) via the [EXLcode Chrome extension](https://chrome.google.com/webstore/detail/exlcode-vs-code-based-onl/elcfpiphmolcddmecegalaikjiclhdjc?hl=en). Now, to execute the code, we need to clone the repository locally.
 
@@ -53,7 +52,6 @@ The demo project code will be accessed from both the host (your laptop) and the 
   git clone --depth=1 https://github.com/<your org>/<your fork>.git ~/docker-vol/demo-gql-mongo
   ```
 
-
 ### Docker Containers We Will Run
 
 - MongoDB
@@ -64,10 +62,8 @@ The demo project code will be accessed from both the host (your laptop) and the 
   * we'll launch a NodeJS container to install the project and run our application from the container's shell
   * we'll share the project's folder cloned on the dev box (*host*) with this container 
 
-
 ### Docker Compose or Not
 
 Docker CLI is one of the core skills every developer must absolutely have. Basically, Docker Compose is just a convenient way to manage multiple containers using one YAML file vs. typing individual CLI for each. As we only have two containers in scope - let's just CLI them for now.
-
-
+<br>
 Let's get to work! The following two lessons are parallel ones for Windows and Linux - *skip* the one that does *not* apply to your host OS

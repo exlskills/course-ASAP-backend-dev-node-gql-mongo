@@ -17,8 +17,7 @@ In practice, only some fields in Object Types have resolvers coded - the majorit
 
 Just a notch deeper into the theory, as everything in JS is a *function*, the *default resolver* doesn't just read a value from the *source* object when it finds a matching name - it *executes* the value as if it was a function, which it can be. So, here's another opportunity building some data-driven complex solutions - out of scope in the demo project.
 
-
-## Example: Order Item Type
+### Example: Order Item Type
 
 `src/relay-models/order-item-type.js`. The imports come from `graphql`, `graphql-relay`, as well as `./node-definitions-type`. The last two are relay-specific, we'll discuss them in details later. The `relay`-specific part of the demo project implementation covers the *paging* functionality in a more specialized way than the core `graphql` package defines.
 
@@ -46,8 +45,7 @@ The `fields` property is a JS function that returns an object containing definit
 
 `obj` here represents the *source* returned from the query resolver. We'll review that function in later chapters, but you can see the familiar MongoDB schema field names `_id` and `item_id`. Yes, the output of the query resolver will be a MongoDB extract.
 
-
-## GraphQL Relay Global ID
+### GraphQL Relay Global ID
 
 Just like MongoDB requires that Documents have unique IDs, GraphQL Relay uses its own internal IDs to identify all objects. In the above example, each Order Item is assumed to have an `id` and Item - `item_id`. In the Relay client, the data processing and caching logic is based on identifying data by those IDs. The IDs *must be* unique, otherwise, the Relay client will misbehave. Note that GraphQL does not enforce the uniqueness, so it is up to the developer to ensure that the IDs are generated properly in the dataset being sent to the client.
 
@@ -55,13 +53,11 @@ The IDs are [Base64 encoded](https://www.base64encode.org/). Relay calls them Gl
 
 Function `globalIdField()` is provided by `graphql-relay` package to facilitate the ID encoding into Base64, as well as a corresponding function for decoding from Base64 back to the readable Global IDs form. Base64 is an HTTP-friendly format and widely used in web development.
 
-
-## Other Fields
+### Other Fields
 
 The rest of `fields` in `src/relay-models/order-item-type.js` matches the MongoDB schema, so that the *default resolver* can map the values in from the extracted *source*
 
-
-## GraphQL Object Type and Connection Embedding - User Order Type
+### GraphQL Object Type and Connection Embedding - User Order Type
 
 `src/relay-models/user-order-type.js` illustrates how embedded objects can be handled in GraphQL: 
 
@@ -101,7 +97,5 @@ Let's think about where this complexity is coming from. In the MongoDB schema, O
 Literally, the above defines `order_items` as a list (array) of `OrderItemType`. The `OrderItemConnection` is not used in this case.
 
 As there is no limit on how many Order Items a User Order may have, there may be orders with lots of them. That may overflow a small mobile device screen and strain the client app memory. A proper design is to always treat any List as a *Connection* that the client can retrieve page-by-page.
-
-
-
+<br>
 Next, we'll review Query definitions. You'll see what the `args` are, etc. 

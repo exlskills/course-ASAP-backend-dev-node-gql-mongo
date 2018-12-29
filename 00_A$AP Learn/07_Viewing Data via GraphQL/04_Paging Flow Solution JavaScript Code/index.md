@@ -1,9 +1,8 @@
-## Paging Flow Solution JS Code
+### JS Code Implementing Smart Paging
 
 Folder `src/paging-processor` contains the set of functions that map the paging parameters we've seen in `node_modules/graphql-relay/lib/connection/connection.js` to a *generic function launcher* that executes individual MongoDB queries written to extract specific datasets.
 
-
-## MongoDB Query Launcher
+### MongoDB Query Launcher
 
 `src/paging-processor/find-with-paging.js` is the component where the database query function gets called:
 
@@ -44,12 +43,10 @@ Back to the `execDetails.queryFunction` call, we also pass:
 - `args.filterValues` directly from the query. This argument is included mostly for system-to-system type of interfaces; it is not a good practice opening direct query access to users, so this parameter is ignored in most DB query builders in the demo project
 - `aggregateArray` - the evaluated combination of `sort` and `limit` per the GraphQL query, as well as `skip` based on the paging logic
 
-
-## Utility Methods
+### Utility Methods
 
 `src/paging-processor/aggregate-array-builder.js` and `src/paging-processor/connection-from-datasource.js` contain utility methods executing the logic that assigns the `aggregateArray` parameter values and carries out the cursor-related work. Most of the code is written in a traditional *if-then-else* format that is easy to understand and follow through. There is nothing special in there, just working through the steps we detailed in the previous lesson.
 
 That concludes the smart paging solution overview. Now as you see it action in the GrapiQL results and console logging, you know exactly what it does, how and why.
-
-
+<br>
 Next, will look at the GraphQL Input Type schemas defined in `src/relay-queries/input-types-get-query.js`. Those are used to manage common query input structures on the client side and their mapping into what the server receives

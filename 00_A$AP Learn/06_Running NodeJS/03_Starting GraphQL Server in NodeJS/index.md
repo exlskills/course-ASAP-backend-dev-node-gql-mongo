@@ -21,10 +21,10 @@ In the dev mode, you do want to run NodeJS "interactively" so that you can see t
 
 You can check `docker stats` on the host to see how much resources the containers take up. Not bad at all! Neither NodeJS nor MongoDB are resource hogs, thankfully.
 
-
 ### Quick Test from the Browser
 
 On the host, open a browser and navigate to `http://localhost:8080/graph` (change the `8080` port to the one you used in the `docker run` when launching `node-dev`, if it was different)
 
-
-You'll see a `GraphiQL` work screen. Great, everything works! Back in the code now - to see what is actually running
+You'll see a `GraphiQL` work screen. Great, everything works! 
+<br>
+Back in the code now - to see what is actually running

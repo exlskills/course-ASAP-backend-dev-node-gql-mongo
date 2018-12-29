@@ -8,7 +8,6 @@ The relaxed Document structure removes such a huge nuisance of RDBMS as *migrati
 
 So, overall the flexibility seems to be a lesser downside than enforcing the model consistency in the DB layer - validate the data in your App, before it gets passed into the DB. As the App is your ultimate producer and consumer of the data - should the logic change, you only have one system to re-code.
 
-
 ### Document Object ID
 
 Each Document in MongoDB must have a unique field `_id`. The engine will assign one automatically when *creating* (inserting) a Document if it is *not* explicitly passed. If the `_id` is passed in, the engine checks its uniqueness across existing Collection Documents and fails the operation if the `_id` is already used. 
@@ -17,11 +16,9 @@ The auto-generated MongoDB `ObjectId` type is 12 bytes in size, with the leading
 
 Once the Document is created, its `_id` cannot be changed.
 
-
-## Embedded Doc ID
+### Embedded Doc ID
 
 An `_id` field can also be put on embedded documents (or anywhere in the doc). MongoDB will *not* treat it in any special way - think of it a regular field. The demo project model contains `_id` on some embedded documents - those used for the business model consistency and assigned via the `mongoose` functionality.
- 
 
 ### Date and Time
 
@@ -33,7 +30,6 @@ As an example, let's assume that your browser client, the app server and the Mon
 
 You should also pass explicit Time Zones with your queries to ensure you're filtering the data unambiguously. If you don't - the app's Time Zone will be defaulted in.
 
-
 ### What About Replication and Sharding?
 
 Your database must always be available and operational, which is enabled by continuously replicating data across distributed physical locations. You should still perform periodic backups, mostly as an insurance in case someone or something wipes out your data, but in terms of the hardware availability - it runs 24x7. How do you achieve that? By using a reputable database service for your production. For MongoDB, [Atlas](https://www.mongodb.com/cloud/atlas) is a robust and cost-effective option, especially if your App is hosted at a major Cloud provider (which it should be).
@@ -42,18 +38,16 @@ If you use Atlas, you don't need to worry about installing and maintaining your 
 
 Sharding allows you controlling how your data is placed. If you got a lot of data, it becomes important where specific subsets of the data are located relatively to providers and consumers. Out of scope for this demo course.
 
-
 ### More on Indexing
 
 Indexes in MongoDB are used to assist search and sorting - no surprise there. 
 
 If a field is inside an embedded *array*, e.g., `"items.sku"`, each element of the array is indexed transparently - as expected. Unlike RDBMS, MongoDB specifically distinguishes between *Single Field* and *Compound* Indexes - those that are built over two or more fields. In RDBMS, the query engine is supposed to figure out the best access path based on all indexes available in the schema. According to the documentation, MongoDB can also do *Index Intersection* - use multiple existing indexes to assist in selecting Documents matching a multi-condition query.
 
-E.g., if selecting some Orders of one User, an RDBMS-trained dev would expect that the engine will use the User index first, then the index on the Order condition, say, Date, to get the result. Not necessarily so in MongoDB: it may end up using one single-field index only, e.g., on the User ID, and then scan over all Orders for that User, even if an index covering the Order filter condition exists. The practical solution is to check all important queries via the Compass "Explain Plan" option to ensure a proper access path used. Conveniently, indexes can be added or deleted on the fly via Compass as well. So, if you want to streamline your multi-condition query, you may need to create a *Compound* index, e.g, on User ID and Order Date in our example. In production, MongoDB Atlas service will send you warnings if your queries cause multi-record scans. Depending on the tier of your service at Atlas, you can even get detailed analysis reports, but usually a quick look at your queries and check via Compass would lead you to the fix.
+E.g., if selecting some Orders of one User, an RDBMS-trained developer would expect that the engine will use the User index first, then the index on the Order condition, say, Date, to get the result. Not necessarily so in MongoDB: it may end up using one single-field index only, e.g., on the User ID, and then scan over all Orders for that User, even if an index covering the Order filter condition exists. The practical solution is to check all important queries via the Compass "Explain Plan" option to ensure a proper access path used. Conveniently, indexes can be added or deleted on the fly via Compass as well. So, if you want to streamline your multi-condition query, you may need to create a *Compound* index, e.g, on User ID and Order Date in our example. In production, MongoDB Atlas service will send you warnings if your queries cause multi-record scans. Depending on the tier of your service at Atlas, you can even get detailed analysis reports, but usually a quick look at your queries and check via Compass would lead you to the fix.
 
 The direction of indexes - Ascending or Descending - can be specified at the field level, and it is also affects whether or not the index is used processing the query, especially with Compound indexes supporting sort criteria.
 
 Text indexes is an interesting topic, outside of scope of this demo. MongoDB has developed a language-specific text search functionality, which is quite extensive. The best (and only) way figuring it out is by trying different combinations of indexing and search methods. Up to you if you want to give it a shot or move to using something like [Elasticsearch](https://www.elastic.co/) as your open text search solution.
-
-
+<br>
 Now that we've covered key schema design considerations - let's look at the CRUD (Create, Read, Update, Delete) principles of MongoDB

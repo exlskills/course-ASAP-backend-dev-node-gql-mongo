@@ -1,7 +1,4 @@
-### listUserOrders Code Components and Process Flow
-
-
-## Influence of Graph Theory
+### listUserOrders And Graph Theory
 
 As noted before, the line between Query and Object Type schemas in GraphQL is pretty blurred: both have *resolvers* and may receive *source* objects from previous steps in the flow. Why is that? Lack of design separation?
 
@@ -19,8 +16,7 @@ Should we be storing the data in some Graph database vs. NoSQL MongoDB? A thorou
 
 It looks like mixing different technologies lets us taking advantages of each one's offerings vs. limiting the design by a particular mode of abstraction.
  
-
-## listUserOrders GraphQL Query and Object Types
+### listUserOrders GraphQL Query and Object Types
 
 - Query: `src/relay-queries/user/user-order-list-query.js`
   * takes the same arguments we've seen before: `orderBy`, `filterValues`, `resolverArgs`, `...connectionArgs`, plus the ID of the User in the form of GlobalId, a required argument:
@@ -69,8 +65,6 @@ It looks like mixing different technologies lets us taking advantages of each on
   
   Other than the `obj`, though, nothing else gets passed from the parent query down. All the sub-query arguments are separate from those for the parent query, even though they have the same names.
 
-
 Remember, we learned that GraphQL returns only the fields that the client asked for. Field-level resolvers are not even engaged if the field was not requested by the client. Here's a great example to prove that: if the client does not ask for `order_items` - `resolveListOrderItems` will not be called. What a difference from coding REST with table joins! Sure, we could have provide two separate REST end points: one for Order-level and another for Order Item-level data queries. But imagine the amount of work on both server and client sides to separate those. 
-
-
+<br>
 `listUserOrders` database query implementation is coded using MongoDB Aggregations - let's take a detailed look at this key technology next

@@ -49,8 +49,7 @@ mutation sendOrder($order_data_input: CreateOrderInput!) {
 
 In the demo project, no duplicate validation is coded on the User Order content, so this mutation can be run multiple times with the same data - new identical Documents will be created.
 
-
-## Mutation Schema
+### Mutation Schema
 
 The `src/relay-mutations/order/create-order-mutation.js` contains the Input Object definition. 
 
@@ -77,8 +76,7 @@ The `src/relay-mutations/order/create-order-mutation.js` contains the Input Obje
 
 Notice, how `orderObj` is declared as a `const` and initialized with 2 parameters: `order_date` and an empty `order_items` array. Then two more parameters are added to it using the *dot* notation: `orderObj.user_id` and `orderObj.payer_id`. The Items array is populated in the `for` loop over the corresponding input data.
 
-
-## Mutate-and-Get Function and The Database Processor
+### Mutate-and-Get Function and The Database Processor
 
 "Mutate and Get" function `createOrder` is in `src/relay-mutate-and-get/order-mag.js`:
 
@@ -87,8 +85,7 @@ Notice, how `orderObj` is declared as a `const` and initialized with 2 parameter
  
 Database function `createOrder` is in `src/db-handlers/order/order-cud.js`. 
 
-
-## Order ID Validation Loop and MongoDB Error Checking
+### Order ID Validation Loop and MongoDB Error Checking
 
 Similarly to `createUser`, the Order ID is generated via `id_gen()`. However, in this flow we don't validate the uniqueness of the ID by querying the database. Instead, the `while` loop is coded wrapping the `create` method execution on the `UserOrder` model. If the ID is not unique, the `create` will error out with a message like this:
 
@@ -113,5 +110,5 @@ As MongoDB reports the troubled `key` back - we can compare it with the `_id`, s
       )
 ``` 
 
-
+<br>
 As the last mutation topic - let's see what happens when we combine several ones together. Who would guess it's totally possible in GraphQL (on the client side)

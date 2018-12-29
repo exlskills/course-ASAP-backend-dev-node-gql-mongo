@@ -16,12 +16,11 @@ To better identify files in stacked editor tabs, files names end with distinct s
 - mutation - GraphQL *mutation* Type definitions
 - query - GraphQL query Type definitions
 - resolver - GraphQL *resolvers* - query handlers 
- 
 
 ### Naming Fields, Variables and Functions
 
 - MongoDB and GraphQL fields - lower case, underscore-delimited (*snake_case*). Field names for the same content in MongoDB and GraphQL are identical
 - Variables and Functions - *camelCase*. Using different cases for fields vs. variables helps separating the two in the code
- 
 
+<br> 
 And now - on to the MongoDB stuff!

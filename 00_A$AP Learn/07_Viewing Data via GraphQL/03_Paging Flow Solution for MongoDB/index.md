@@ -4,13 +4,11 @@ As mentioned in "GraphQL Data API" chapter, GraphQL or Relay packages do not inc
 
 This section talks about some pretty deep implementation details that are not directly related to the GraphQL technology but illustrate the scope of work that the developer needs to cover when building a solution. Read on. A word of caution - this may be difficult to grasp from the first try. Do your best, if something is not clear - keep on moving: it will sink in as you work with the code, just get what you can for now.
 
+### Finding a 3rd Party Package
 
-## Finding a 3rd Party Package
+There is certainly a selection of open source JS packages available on GitHub that cover connectivity from GraphQL, and `graphql-relay` in particular, to MongoDB. Some may look too restrictive, assuming a certain way how MongoDB schemas should look like to work well with GraphQL schemas. Others are documented badly, so it's hard to figure out what they do without getting deep into the code. As a developer, you know, often times, writing your own code is faster than figuring someone elses out and adopting.
 
-There is certainly a selection of open source JS packages available in GitHub that cover connectivity from GraphQL, and `graphql-relay` in particular, to MongoDB. Some may look too restrictive, assuming a certain way how MongoDB schemas should look like to work well with GraphQL schemas. Others are documented badly, so it's hard to figure out what they do without getting deep into the code. As a developer, you know, often times, writing your own code is faster than figuring someone elses out and adopting.
-
-
-## The Definition of Proper Paging
+### The Definition of Proper Paging
 
 To implement flexible paging correctly we must account for the impact of possible changes in the underlying dataset while the data review session is in progress. 
 
@@ -20,8 +18,7 @@ Similarly, changes to the underlying dataset would cause a basic forward paging 
 
 Here's the catch - if we could form our database query to retrieve the *next page* reliably using some tangible filtering condition vs. *skipping* over records that we *assume* were already displayed - there would be no problem paging through a dynamically changing dataset. However, in a real app use case, there is no simple generic way to do so. E.g., the browsing user may ask for alphabetical users greater than John Public, or for users joined after a particular date, or for usernames greater than John01, etc. If we're to use query-level filtering to page through the User dataset in all those different scenarios, we'd have to either write lots of database queries or code a database query generator to cover for all types of sorting and conditions the system offers. Good luck with that.
 
-
-## The Smart Skipping Solution
+### The Smart Skipping Solution
 
 So, a practical paging solution can't rely on ability to use database query-level filtering, but rather utilize skipping over previously returned records, with logic added to *correct the course* if shifts in the underlying data affect the *page* the browsing user wants to see.
 
@@ -33,8 +30,7 @@ What happens if our dataset has shifted? Our actual skipped records in the core 
 
 Let's reiterate this again in an example. The browser user asks for the initial page of data. On the server side, we execute a sophisticated database query with sorting and filtering, and `limit` the set to the requested page size. The user asks for the next page passing the *cursor* of the *last* record returned with page-1. We run the same database query, adding the `skip` parameter at the amount of records we returned last time, *minus one*, and `limit` to the page size *plus one* . We *optimistically* expect that the first record in the set returned by this database query will start with the *last record* we sent last time. If yes - we remove that record from the set and pass the rest to the user. If no - we run the database query wide open and search for where our *last record* is now, then send the page-size amount of *current* records after it to the user. And so on.
 
-
-## What if the GraphQL Query Content Changed?
+### What if the GraphQL Query Content Changed?
 
 So far, we looked at paging through a dataset using *a given* GraphQL query: next, next, next. What happens if the browser user wants to change some filtering conditions or the sort order, still sending a *reference point cursor* with the query. How can we distinguish this changed query request from an unchanged *next page* one? We cannot, because
 
@@ -54,7 +50,6 @@ Here, we count from the beginning of the dataset `|0`, and our records are `|0` 
 
 Why do we have to define the record's position in the filtered dataset as two numbers vs. just one? Because we *do not know* how many records are in the *entire* filtered dataset as we're paging through it. We only know about the records that we have retrieved. And depending on the sorting of the dataset and the direction of viewing (forward vs. backward) - sometimes, we may have to process the dataset from the *end* vs. *start*. Just a technicality. The 1st number is a *flag*: `0` when we go from the start and `1` - from the end of the dataset. The second # is the *position*.
 
-Sounds like running the query two times is a bad approach? Well, we only do that if the relevant part of the dataset changed or the user changed the way of paging through the *same* data (the user sent us a record from that data to use as the reference point cursor) - in a typical business scenario this would not be happening a lot.
-
-
+It feels that running the query two times is a bad approach? Well, we only do that if the relevant part of the dataset changed or the user changed the way of paging through the *same* data (the user sent us a record from that data to use as the reference point cursor) - in a typical business scenario this would not be happening a lot.
+<br>
 Let's see how the code doing the above looks like

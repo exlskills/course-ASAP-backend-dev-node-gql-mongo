@@ -16,7 +16,6 @@ When the client terminates the session, the cookie with the JWT is deleted. The 
 
 The IETF has everything about the token detailed in the [Standard](https://tools.ietf.org/html/rfc7519). If you get a kick from reading legal documents or Tax Form instructions - you'd enjoy reviewing the standard. Otherwise, just pick a 3rd party package that can handle the token flow for you and brief yourself on its instructions. `jsonwebtoken` is the one used in the demo project.
 
-
 ### JWT (Intended) Use in The Demo Project
 
 So, in the User-Order demo project Use Case, the User is first directed to the *login* component configured on one of the backend servers (not implemented in the demo project). For better design and added security, that component should be isolated in a protected location. On the GraphQL server, the commented out `middleware.loginRequired` function checks for the presence of the JWT and redirects to the authentication endpoint if JWT is not present.
@@ -26,6 +25,5 @@ On the authentication endpoint (not implemented in the demo project), the User c
 Further in the GraphQL server middleware flow, User ID is decoded from the JWT and put into the `viewer` object.
 
 Basically, JWT makes most of the MongoDB User Collection obsolete: runtime-required User info can be passed in the JWT, so only the data used in post- or analytical processing should be kept in the GraphQL server. Lots of room to optimize the design and protect your backend from break-ins exposing confidential User data.
-
-
+<br>
 Next - logging. Without it we're dead in the water developing, testing, troubleshooting, monitoring. So, logging is the key. Let's get it reviewed - you'll see it is very simple here!

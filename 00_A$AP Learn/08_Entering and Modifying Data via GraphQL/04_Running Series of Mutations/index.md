@@ -31,13 +31,11 @@ mutation sendUserAndOrder($user_data_input: CreateUserInput!, $order_data_input:
 
 Here we have our two mutations put together, literally, one after the other
 
-
-## Client-Server Terminology Confusion
+### Client-Server Terminology Confusion
 
 As a matter of fact, above, we have *one* mutation - `sendUserAndOrder`. The mutation has *two fields* - `createUser` and `createOrder`. That is how the *client* sees this syntax, and, sure enough, the word `mutation` is used only once, at the top, wrapping together the two *mutations* that are defined in the server GraphQL schema.
 
-
-## Query Fields are Processed in Parallel, Mutation Fields - in Sequence
+### Query Fields are Processed in Parallel, Mutation Fields - in Sequence
 
 What does this terminology twist mean for the backend developer? Nothing. Ignore it.
 
@@ -48,6 +46,5 @@ There is definitely some potential usefulness in the fact that multiple mutation
 If you run `sendUserAndOrder` from GraphiQL, the 1st step will likely fail (if you already have this user created). The 2nd step will complete successfully.
 
 From your REST development experience you know that each call must be executed separately, and the client must wait for an acknowledgement to arrive before sending downstream dependant calls. Let's suggest the same to GraphQL client developers and shake off this *parallel vs. sequential* stuff as not so much relevant in real practice.
-
-
+<br>
 This completes the development tasks. The very last step is to generate the client-side GraphQL schema extract!

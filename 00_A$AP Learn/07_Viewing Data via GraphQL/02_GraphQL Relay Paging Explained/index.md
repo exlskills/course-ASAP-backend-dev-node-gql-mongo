@@ -14,8 +14,7 @@ Thankfully, the practical explanation of GraphQL theory and terminology can be q
  
 Now it all comes together: the terminology completely defines the *intermediary* layer that is used by GraphQL  to manage navigation over a dataset generically vs. via some ID inside the dataset that would be dataset-specific and different across various datasets. Well, obviously, there got to be a defined way of getting from the generic *cursor* to some tangible *record id* in the dataset. Yes, exactly. That is what the actual implementation is about. So, for developers, there is not much value in this intermediate layer if a bunch of code still needs to be written to get from this abstraction to the concreteness of the data. We make a mental note of what these terms mean - as we *have to* use them when working with GraphQL - and move on to looking at the real stuff.
 
-
-## More on GraphQL Controlled Paging
+### More on GraphQL Controlled Paging
 
 In GraphQL, we're allowed to page forward (like we usually do in REST) or *backward*. Backward paging is a real deal in a human-browser-server application, so the fact that REST doesn't normally do it is a limitation. In addition to controlling the direction, we can also control the starting point of the page of data we want to receive. In `node_modules/graphql-relay/lib/connection/connection.js`, `forwardConnectionArgs` and `backwardConnectionArgs` have two parameters each:
 
@@ -35,5 +34,8 @@ Those 12-pos IDs in the decoded values are the `_id` of the users, so this looks
 
 In a real scenario browsing through a list of some business-meaningful data, we can select, e.g., a record close to the bottom and request to show next 20 records *following* the one we selected. Or, select a record and request 50 records *above* it - paging *backward*. The `cursor` of the record that we select would be passed to GraphQL to define where to start. In a way, the cursor is similar to the `GlobalID` we've seen used in `graphql-relay`. If you recall, `GlobalID` was encoded from the *name* of the object type followed by object's ID. The cursor, in this implementation, in effect, is an encoded link to a database record. Note that GraphQL doesn't impose any standard on the cursor content - completely up to the developer what should go into there.
 
+### Using Open Source
 
+When working with open-source packages, reading the code is often (always?) preferred to reading documentation. In open-source, the prevailing mentality is that the users should be active participants and contributors to the software. So, don't be lazy reading the (old, outdated and sparse) documentation and complaining about how much everything sucks - get inside the code, figure things out, propose and code improvements!
+<br>
 As we gained the momentum now understanding what this paging stuff is about, let's take a look at the implementation of the paging engine we use - the one responsible for coding the `cursor` values prefixed with `mongo:`. Get ready - the stuff is pretty technical. Well, this is a developer training course, isn't it?

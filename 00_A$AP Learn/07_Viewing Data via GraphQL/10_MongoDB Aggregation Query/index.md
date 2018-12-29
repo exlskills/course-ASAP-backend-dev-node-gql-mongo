@@ -2,10 +2,9 @@
 
 As outlined earlier, the User Order-level and Order Item-level data is extracted via separate query resolvers and separate database query processor functions. 
 
+### Retrieving Order-level Fields Via `find`
 
-## Retrieving Order-level Fields Via `find`
-
-Although, in the demo project, Order and related Order Item are located in one MongoDB Document, *projection* enables us pulling selected parts of the document only. 
+Although, in the demo project Order and related Order Item are located in one MongoDB Document, *projection* enables us pulling selected parts of the document only. 
 
 In `src/db-handlers/user/user-order-list-fetch.js`, the `find` statement is:
 
@@ -35,8 +34,7 @@ Note that the pre-validation is done by calling an imported function vs. using `
 
 MongoDB `select` can be used to either *include* (`1`) or *exclude* (`0`) fields from the query output. In this case, `order_items` are excluded.
 
-
-## Fetching Order Items via MongoDB Aggregation Query
+### Fetching Order Items via MongoDB Aggregation Query
 
 `src/db-handlers/order/order-item-list-fetch.js` demonstrates how *aggregation* is used in MongoDB queries. You've been warned in the "MongoDB Datastore" chapter that Aggregation is a complex and advanced functionality, somewhat on par with, e.g, PL SQL. Luckily, the *80-20* paradigm works well when utilizing Aggregation for backend development with MongoDB: 80% of the functionality can be covered with 20% of methods. Even more like *90-10*.
 
@@ -57,5 +55,5 @@ MongoDB `select` can be used to either *include* (`1`) or *exclude* (`0`) fields
 - `$unwind` is used to *flatten* embedded arrays to work with the data as a set of separate uniform records. E.g., in `fetchOrderItemList` we `$unwind` the Order Items before we *join* the Item Collection to pull in details required in the final output
 - `$lookup` is an equivalent of SQL *join*. In the latest versions of MongoDB, `$lookup` allows executing a *sub pipeline* on the external Collection to control the join conditions and the shape of data coming in
 
-
+<br>
 Let's take a closer look at each pipeline step and their intermediate output. 

@@ -1,9 +1,8 @@
-### Query Input Types
+### Custom Query Input Types for GraphQL Server
 
 We saw how the paging-control query input `...connectionArgs` are defined in the standard `graphql-relay` package. Now let's take a look at the custom Input Types that are set up to provide a uniform way of query arguments formation across our implementation of GraphQL API - `src/relay-queries/input-types-get-query.js`.
 
-
-## Sort Order Arguments
+### Sort Order Arguments
 
 There is no standard on defining the output's Sort Order in GraphQL queries, however it is a good idea to adopt a format used in some popular [big-name APIs](https://developer.github.com):
 
@@ -34,8 +33,7 @@ In this definition, the sorting is called *Order By* and it consists of two para
 
 Notice the use of GraphQL standard types, like `GraphQLEnumType` - we've seen similar types across schema definitions we reviewed earlier. So, if you need to define your type, you build it from one or more standard ones that come with the `graphql` package.
 
-
-## Note on GraphQLDateTime
+### Note on GraphQLDateTime
 
 Somehow, Date/Time has not been included into the `graphql` package, so we use a 3rd party one:
 
@@ -43,10 +41,9 @@ Somehow, Date/Time has not been included into the `graphql` package, so we use a
 import { GraphQLDateTime } from 'graphql-iso-date';
 ```
 
-GraphQL documentation talks about [Scalar types](https://graphql.org/learn/schema/#scalar-types), which are `Int`, `Float`, `String`, `Boolean` and `ID`, and mentions that a *Date* type can be created if needed. Oh, well, it *is* needed developing any worthwhile business API, and yet it's not in the `graphql` package. From Issues entered for the package, it appears that the authors don't feel like there is a strong valuable standard to base the Date implementation on for JS. Thankfully, `graphql-iso-date` provides exactly what we need, never mind another external dependency plugged in - it's part of the JS dev experience.
+GraphQL documentation talks about [Scalar types](https://graphql.org/learn/schema/#scalar-types), which are `Int`, `Float`, `String`, `Boolean` and `ID`, and mentions that a *Date* type can be created if needed. Oh, well, it *is* needed developing any worthwhile business API, and yet it's not in the `graphql` package. From Issues entered for the package, it appears that the authors don't feel like there is a strong valuable standard to base the Date implementation on for JS. Thankfully, `graphql-iso-date` provides exactly what we need, never mind another external dependency plugged in - it's part of the JS development experience.
 
-
-## Query Resolver Arguments
+### Query Resolver Arguments
 
 This part of `listUsers` query definition enables passing a generic `name-value` list from the client:
 
@@ -108,10 +105,9 @@ sampleQuery(<some args>,
 
 Decide which style makes more sense for you. Keep in mind, the browser client users don't ever see GraphQL syntax, only the front end developers do. So, by making the schema more readable you assist your fellow developers, but require them to reload the client side schema file when you post updates.
 
+### Input with Scalar Types
 
-## Input with Scalar Types
-
-In practice, it *appears* that GraphQL does not enforce the use of Input Types as query arguments, although the documentation and official samples recommend doing so. We can list fields with *Scalar* Types directly in the `args` section of a query definition, e.g.:
+GraphQL does not enforce the use of Input Types as query arguments, although the documentation and some official samples recommend doing so. Fields of *Scalar* Types can be used in the `args` section of a query definition, e.g.:
 
 ```
 export const getUserSampleQuery = {
@@ -164,6 +160,5 @@ getOrdersSampleQuery( filterValuesString: "{\"order_items.item_id\": \"1HEOx6FnC
 ### GraphQL Client Query Writing Recap
 
 So, we've looked at the arguments and, along the way, reviewed how to form the required return fields portion of a client GraphQL query. You can try removing individual fields from the `listUsers` sample you run in GraphiQL and execute the query again - those fields will not be included into the returned dataset in the right pane. As simple as that. Also, if you add fields that don't exist in the schema - GraphiQL will complain and won't allow launching the query.
-
-
+<br>
 Next, let's trace how the GraphQL query is actually processed by the server engine

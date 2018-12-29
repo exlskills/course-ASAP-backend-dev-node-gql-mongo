@@ -8,8 +8,7 @@ The database query extracts User Order Items for the given User Order, per the G
 
 In `resolveListOrderItems`, the Order ID for the database query is taken from the *source* `obj`, which is the output of the parent query, and passed into `fetchOrderItemList` via `fetchParameters`.
 
-
-## Aggregation Pipeline
+### Aggregation Pipeline
 
 The aggregation in `fetchOrderItemList` is done on the `UserOrder` Model - see the Model name specified in the execution step at the end of the function's code: 
 
@@ -204,15 +203,13 @@ The aggregation pipeline steps are as follows:
     if (limit) array.push(limit);
   ```
 
-
-## Ta-da
+### Ta-da
 
 ```
 orderItemArray = await UserOrder.aggregate(agrArray).exec();
 ```
 
-
-## Post-processing - Merging Item Details
+### Post-processing - Merging Item Details
 
 Once the aggregation is executed, we need to merge `item_details_as_ordered` with `item_details_base`. For the matching parameters, we need to override the *base* info from the Item Collection with what was requested on the Order Item. JS does it automatically for us when the subsequent *spread* `...` of the two structures is used. Then we convert the `item_details` from an object to a JSON compliant string via `JSON.stringify` and drop the unneeded values from the output object:
 
@@ -233,6 +230,5 @@ The final output is:
 ```
 
 The logic of the aggregation is straightforward and clear. The syntax requires a lot of using-to after SQL. The rules on what should be a variable, an expression, or just a simple object in each statement are confusing at first. But once your first aggregation has been put together and working - the following are largely copy-and-paste.
-
-
+<br>
 Let's take a look at a simple GraphQL query with no paging - to relax a bit after the aggregations brain dump

@@ -1,4 +1,4 @@
-### NodeJS-MongoDB Backend Stack Superpower for a Business Application 
+### NodeJS-MongoDB Backend Stack Superpower for Business Applications 
 
 The goal of this course is to help you making the leap from legacy backend development (anything that's been around for roughly 10-plus years) to developing in a modern and popular stack that is super-powerful - when implemented correctly.
 

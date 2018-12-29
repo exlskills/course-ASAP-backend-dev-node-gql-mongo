@@ -29,8 +29,7 @@ Following down the path, `index.js` under `src/relay-queries/user` imports and e
 
 Finally, the query definition code that we'll review below is in `src/relay-queries/user/user-list-query.js`
 
-
-## Query Arguments
+### Query Arguments
 
 The arguments that the client can or must pass with the query are listed in the query schema `args` property:
 
@@ -108,5 +107,6 @@ Lots of words are in here that we've seen in the schema, in the query we put in,
 - cursor
 - pageInfo
 
+<br>
+Perfect time to get all of this straight, so we can continue on to the more interesting stuff. 
 
-Perfect time to get all of this straight, so we can continue on to the more interesting stuff. BTW, when working with open-source external packages, reading the code is often (always?) preferred to reading documentation. In open-source, the prevailing mentality is that the users should be active participants and contributors to the software. So, don't be lazy reading (old, outdated and sparse) documentation and complaining about how much everything sucks - get inside the code, figure things out and propose improvements!

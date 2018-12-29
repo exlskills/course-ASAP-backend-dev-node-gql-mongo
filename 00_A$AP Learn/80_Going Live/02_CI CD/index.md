@@ -10,12 +10,10 @@ Tests are executed against *testing environment* containers. That is easy: you s
 
 Don't overestimate what CI/CD tools can do for you. As a developer, you know that no testing can salvage garbage code, and good code needs little testing beyond what the author validates while developing it.
 
-
 ### Summing It Up
 
 So, this is really it. You know now how to develop a modern, container-ready app; you have a functioning dev environment; you've got a general idea on how to manage the code going through the CI/CD pipeline; and you have a base understanding of how the app is deployed into Production.
-
-
+<br>
 Congratulation! From this point on you don't need much guidances doing what you do best - developing. Get in and start typing! And always feel free to ping us with questions and suggestions.
-
+<br>
 Thank you and Good Luck!

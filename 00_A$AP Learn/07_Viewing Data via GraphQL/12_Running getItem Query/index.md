@@ -27,12 +27,11 @@ query getItem {
 }
 ```
 
-## Item GraphQL Object Type Generic Structure
+### Item GraphQL Object Type Generic Structure
 
 Notice that `src/relay-models/item-type.js` still contains the `connectionDefinitions` even though it is not used in the query. The purpose is very clear: the same Object Type can be utilized in `getItem` or `listItems` (not coded in the demo project), or even as a sub-element in something like the `listUserOrdersDetails` where all Item fields are displayed. Object Types should be kept generic and reused when possible
 
-
-## Item ID Filter Definition 
+### Item ID Filter Definition 
 
 Per `src/relay-queries/item/get-item-query.js`, the `getItem` query receives one required argument - Item Global ID:
 
@@ -42,7 +41,7 @@ Per `src/relay-queries/item/get-item-query.js`, the `getItem` query receives one
     }
 ```
 
-## Display and Filter of the Item Price
+### Display and Filter of the Item Price
 
 As defined in the Item database schema `src/db-models/item-model.js`, the Item Price is an embedded array of ItemPrice objects defined in `src/db-models/item-price-model.js`. Similarly, `src/relay-models/item-type.js` defines `item_price` as a `GraphQLList`. 
 
@@ -82,6 +81,5 @@ In a real business use case, we'd likely want to provide capabilities to retriev
 
 - last point to mention: it probably makes sense setting `item_price` in the Item Object Type as a *connection* vs. a *list*, enabling the GraphQL paging functionality. As a rule, datasets that may grow in size should have paging enabled. As we saw, *paging* is optional to use on the client side even if it is enabled in the server's schema design.
 
-
+<br>
 Finally, before moving on to Mutations, let's check out the "client-defined" query option. We'll also dig a bit deeper into the structure of the `mongoose` query result *object* 
-

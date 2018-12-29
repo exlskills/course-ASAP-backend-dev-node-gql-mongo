@@ -1,4 +1,4 @@
-### Setting Up Local .env Configuration File
+### Local .env Configuration File
 
 Now that we have the development environment hot, let's make sure our local configuration file `.env` is set up correctly. 
 
@@ -22,6 +22,6 @@ Unless you use a different MongoDB setup from the one described in the previous 
  This is the classic way of orchestrating multiple services and servers running on a Docker host. Simple and powerful. 
  As a disclaimer, the database is not secured, so don't put any sensitive info in it and don't expose your host's port `27017` to the open Internet. Even if you configure this DB with a password, you'll end up saving it in the open in the `.env` file. So, don't bother, just don't keep anything confidential in your dev DB. As we discussed in the "Project Custom Configuration File" lesson, the Production environment is well protected by virtue of running your Docker Production containers and services inside a secured orchestration framework. In dev, it's all on your laptop - with the intent that you can develop efficiently. Unless you know how to absolutely secure access to your laptop - don't copy your production database down into it to seed the development. Not a good practice.
 - `DB_NAME=web_dev` - defines the name of the MongoDB database. The database will be automatically created if it doesn't exist - the first time we hit the DB server loading data into it
- 
 
-Next, on to the `install` step in our dev project lifecycle!
+<br> 
+Next, on to the `install` step in our project lifecycle!

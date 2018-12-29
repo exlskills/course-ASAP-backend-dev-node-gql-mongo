@@ -11,6 +11,5 @@ npm run update-schema
 As per `package.json` `scripts`, the `update-schema` command is run, which executes `scripts/updateSchema.js`. Per `scripts/updateSchema.js`, the resulting schema extract goes to `src/schema.graphql`.
 
 Distribute `src/schema.graphql` to the Relay JS clients. Should be repeated whenever anything changes in the server's GraphQL schema. 
-
-
+<br>
 Literally, that's all. We are done. Congratulations!
