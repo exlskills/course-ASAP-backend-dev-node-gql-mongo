@@ -1,4 +1,4 @@
-### MongoDB NoSQL Model 
+### Getting Comfortable With MongoDB NoSQL 
 
 Any professional developer knows what a Host, Database, Table, Record, Column, Field, Cell, Index are. Those who spent their careers working with Relational databases will find MongoDB very familiar and recognizable, in spite of its *NoSql* designation. 
 

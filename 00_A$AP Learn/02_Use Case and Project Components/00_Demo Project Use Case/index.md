@@ -1,4 +1,4 @@
-### The Use Case For The Course
+### The Use Case To Make Development Interesting
 
 A backend use case usually includes a front end (FE) piece as means to invoke the functionality. Luckily, the *GraphQL API* that we employ as the backbone, comes with a built-in data access facility, so we can develop a complete solution and view it in action without having to code or borrow a FE app. 
 
@@ -8,8 +8,8 @@ Though, wouldn't it make more sense building a backend and a FE together? After 
 
 ### So, What Is The Use Case We Are Going To Code?
 
-Sales Order Entry: Customers, Items, Orders. We will call Customers *"Users"* - as modern applications are always self-service oriented. 
+Let's develop a Sales Order Entry (SOE) server API: Customers, Items, Orders. We will call Customers *Users* - as modern applications are always self-service oriented. So, "User Orders".
 
-Here's the business process flow in scope: the User gets access to the system, picks Items, creates an Order; the Order is stored in the database and can be retrieved via the API.
+Here's the generic SOE business process flow in scope: the User logs in, creates an Order using the API; the Order is stored in the database and can be retrieved via the API.
 <br>
 Next, we'll start working with the actual code!

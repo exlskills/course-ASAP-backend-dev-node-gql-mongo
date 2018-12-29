@@ -6,4 +6,4 @@ Check the [Docker Website](docker.com) for the latest installation instructions.
 
 On Linux, for convenience, configure non-root access to Docker CLI.
 <br>
-Next, making sure the Git skill is at the required professional level. Those who can't Git simply can't be called developers these days. There are 3-4 commands in Git for the everyday work - about as many as in Docker
+Next, making sure the Git skill is at the required professional level. Those who can't Git simply can't be called developers these days.
