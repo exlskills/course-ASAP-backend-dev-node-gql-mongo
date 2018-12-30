@@ -15,5 +15,9 @@ Use a reliable service.
 ### GraphQL Server
 
 Use a reliable, reasonably priced container orchestration service.
+
+### Note On Disabling GrapiQL In Production
+
+Some documentation recommends doing so. As GraphiQL requires the server to do some extra work - this advice may make sense for busy installations. However, that limits your clients from testing things out against your published API. Your choice.
 <br>
 The actual deployment steps worth going through another course. Not that they require knowledge that an average developer doesn't already have or can't quickly gain. But that *is* another course. So, here we'll just cover a few quick points to help settling the backend development foundation - read on!

@@ -48,5 +48,9 @@ There is definitely some potential usefulness in the fact that multiple mutation
 If you run `sendUserAndOrder` from GraphiQL, the 1st step will likely fail (if you already have this user created). The 2nd step will complete successfully.
 
 From your REST development experience you know that each call must be executed separately, and the client must wait for an acknowledgement to arrive before sending downstream dependant calls. Let's suggest the same to GraphQL client developers and shake off this *parallel vs. sequential* stuff as not so much relevant in real practice.
+
+### Batching Use Case
+
+An unexpected twist to promote *combining* or *batching* queries or mutations (one or the other kind, of course) into a single request comes from a use case working with a *metered* GraphQL service. If the GraphQL backend provider limits how many requests a given client is allowed to make during a period of time - no brainer, the client would want to combine as many *fields* as possible into a single request to stay within the limit. 
 <br>
 This completes the development tasks. The very last step is to generate the client-side GraphQL schema extract!
