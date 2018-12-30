@@ -35,6 +35,8 @@ Here we have our two mutations put together, literally, one after the other
 
 As a matter of fact, above, we have *one* mutation - `sendUserAndOrder`. The mutation has *two fields* - `createUser` and `createOrder`. That is how the *client* sees this syntax, and, sure enough, the word `mutation` is used only once, at the top, wrapping together the two *mutations* that are defined in the server GraphQL schema.
 
+The official [GraphQL documentation](https://graphql.org/learn/queries/) talks about Queries and Mutations from the front end point of view first. Then they talk about [Query and Mutation Schema Types](https://graphql.org/learn/schema/#the-query-and-mutation-types). Here's the clue: in the client-side terminology, Queries and Mutations are *Requests*, whereas for the backend developer - they are *Types*. And those are *not* the same things. 
+
 ### Query Fields are Processed in Parallel, Mutation Fields - in Sequence
 
 What does this terminology twist mean for the backend developer? Nothing. Ignore it.
