@@ -34,5 +34,9 @@ Git may be a fulltime job for a team lead to perform, but in the day-to-day deve
 For the everyday work, you do `git add`, `git pull`, `git commit`, `git push` when you're ready to send your code to the remote. Run `git reset HEAD --hard` when all you've done was tweaked the local code to test something and want to get rid of the tweaks.
 
 When you get a chance, take our ["Git and GitHub" ExlSkills Free Course](https://exlskills.com/learn-en/courses/learn-essential-git-for-github-with-exlskills-intro_github)! You've got to get comfortable with Git if you want to be a developer these days, no questions asked.
+
+### Git and File Timestamp
+
+One mind-blowing thing about Git for a legacy developer is that Git *ignores* file timestamps. First thing you notice when you *clone* a repo locally - everything that comes into your machine is assigned the *now* timestamp. So, from the local filesystem's point of view, you can't see when each particular file was actually last updated. Likewise, you may edit a file and save it multiple times, yet it won't show in `git status` as updated unless the current *content* of the file is different from the cloned one. So - Git *drops* and *ignores* local file timestamps. Understand and get used to it. The *updates* in Git are traced by *commit* times. And that can get confusing if there were *merges*.
 <br>
 Next, we'll get the IDE installed
