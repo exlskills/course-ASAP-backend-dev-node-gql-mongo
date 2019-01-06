@@ -21,7 +21,7 @@ All contributions in the form of pull-requests and issues are welcome and greatl
 
 ## Translations
 
-We are always working on translating this course to other languages to make it accessible to as many people around the world as we can. To open work on a new language, please create an issue in this repository for the maintainers to guage interest and we will start a translation branch.
+We are always working on translating this course to other languages to make it accessible to as many people around the world as we can. To open work on a new language, please create an issue in this repository for the maintainers to gauge interest and we will start a translation branch.
 
 ## License
 
