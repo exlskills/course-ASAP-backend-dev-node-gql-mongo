@@ -13,14 +13,14 @@ Of course, even though the hosts are logically virtualized, somewhere down the v
 - containers' own file system is ephemeral and disappears when containers are replaced 
 - volumes shared with hosts are mapped to some physical storage devices that often cannot be moved around at will, so replacement containers must be put somewhere where they get access to that storage
 - *network storage* adds latency and complexity 
-- containers running on a given host complete for the finite resources of the physical machine the host runs on 
+- containers running on a given host compete for the finite resources of the physical machine the host runs on 
 - distributed clusters are great for redundancy and availability but add latency to cross-container communications
 
 Solutions to these issues may undermine advantages of containerization or drive up costs. When containerization becomes more expensive than pure VM-based cloud - people either revert back to VMs or keep exploring options, e.g., go *serverless* 
 
 ### Proper Solution Design for Containerization Success
 
-Just like with moving monster legacy server-based architecture to VMs, the success of VM to container move is rooted in proper app design. If all we do is through an existing VM app into containers - we may be doing disservice to ourselves and our customers.
+Just like with moving monster legacy server-based architecture to VMs, the success of VM to container move is rooted in proper app design. If all we do is throw an existing VM app into containers - we may be doing disservice to ourselves and our customers.
 
 Examples of how the traditional VM-based design makes the app a bad fit for containerization are plentiful. To mention just a couple:
 
