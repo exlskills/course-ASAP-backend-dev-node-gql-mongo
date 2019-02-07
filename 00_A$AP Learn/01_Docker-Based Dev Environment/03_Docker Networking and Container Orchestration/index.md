@@ -13,7 +13,7 @@ Of course, even though the hosts are logically virtualized, somewhere down the v
 - containers' own file system is ephemeral and disappears when containers are replaced 
 - volumes shared with hosts are mapped to some physical storage devices that often cannot be moved around at will, so replacement containers must be put somewhere where they get access to that storage
 - *network storage* adds latency and complexity 
-- containers running on a given host complete for the finite resources of the physical machine the host runs on 
+- containers running on a given host compete for the finite resources of the physical machine the host runs on 
 - distributed clusters are great for redundancy and availability but add latency to cross-container communications
 
 Solutions to these issues may undermine advantages of containerization or drive up costs. When containerization becomes more expensive than pure VM-based cloud - people either revert back to VMs or keep exploring options, e.g., go *serverless* 
