@@ -20,7 +20,7 @@ Solutions to these issues may undermine advantages of containerization or drive 
 
 ### Proper Solution Design for Containerization Success
 
-Just like with moving monster legacy server-based architecture to VMs, the success of VM to container move is rooted in proper app design. If all we do is through an existing VM app into containers - we may be doing disservice to ourselves and our customers.
+Just like with moving monster legacy server-based architecture to VMs, the success of VM to container move is rooted in proper app design. If all we do is throw an existing VM app into containers - we may be doing disservice to ourselves and our customers.
 
 Examples of how the traditional VM-based design makes the app a bad fit for containerization are plentiful. To mention just a couple:
 
